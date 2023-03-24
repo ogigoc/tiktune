@@ -1,2 +1,5 @@
 tmp/
 service_account.json
+drive_videos/
+profiles/
+**/__pycache__/
