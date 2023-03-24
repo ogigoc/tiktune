@@ -1,7 +1,9 @@
+import subprocess
 from datetime import datetime
 import time
 import traceback
 from urllib.parse import quote
+import yaml
 
 import uiautomator2
 
@@ -44,6 +46,18 @@ def recover(d):
         return True
 
     if d(textMatches='View your friend.{0,3} posts').exists():
+        d(clickable=True)[1].click()
+        return True
+
+    if d(text='Notifications keep you up to date!').exists():
+        d(text='Later').click()
+        return True
+
+    if d(text='Turn on notifications?').exists():
+        d(text='Not now').click()
+        return True
+
+    if d(text='Add TikTok camera shortcut').exists():
         d(clickable=True)[1].click()
         return True
 
@@ -356,6 +370,11 @@ def find(d, nodes):
 #     d(text='Next').click()
 #     d.send_keys('Dijana Music')
 
+
+def adb_connect(device_id):
+    cmd = subprocess.run(["adb", "connect", device_id])
+    cmd.check_returncode()
+
             
 def main():
     global INTERACTIVE
@@ -365,15 +384,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--device", help="Name of the device to connect to", required=True)
 
+    with open('devices.yaml', 'r') as file:
+        devices = yaml.safe_load(file)
+
     args = parser.parse_args()
 
-    match args.device:
-        case 'redminote':
-            device_id = '3646ec0f'
-        case 'j7':
-            device_id = '100.99.18.17'
-        case _:
-            raise Exception(f"Device {args.device} not supported")
+    device_id = devices[args.device]['device_id']
+
+    adb_connect(device_id)
 
     d = uiautomator2.connect(device_id) # connect to device
     # d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity')

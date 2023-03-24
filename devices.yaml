@@ -1,0 +1,32 @@
+desk:
+  name: desk
+  videos_per_campaign:
+    onazna: 2
+    provozamo: 4
+    ljubavnarepeat: 5
+    srceluduje: 2
+    belebembare: 1
+    rari: 2
+
+redminote:
+  name: redminote
+  device_id: 3646ec0f
+  videos_per_campaign:
+    onazna: 1
+    provozamo: 1
+    ljubavnarepeat: 1
+    srceluduje: 1
+    belebembare: 1
+    rari: 1
+
+j7:
+  name: j7
+  device_id: 100.99.18.17
+  videos_per_campaign:
+    ljubavnarepeat: 1
+
+s5:
+  name: s5
+  device_id: 100.97.245.82
+  videos_per_campaign:
+    onazna: 1

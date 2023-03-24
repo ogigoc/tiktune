@@ -76,7 +76,7 @@ class Segment():
             print(f"Skipping {self.output_path}, exists.")
 
 
-def create_segments(campaign_name, bstart=3, bend=3, step=2):
+def create_segments(campaign_name, step, bstart=3, bend=3):
     print(f"Loading templates for campaign {campaign_name}")
     templates = [
         VideoFileClip(path, has_mask=True)
@@ -181,9 +181,9 @@ def create_segments(campaign_name, bstart=3, bend=3, step=2):
 #     print(f"Ending process {i}...")
 
 
-def process_campaign(campaign_name, processes=2):
+def process_campaign(campaign_name, step):
     print(f"Processing campaign {campaign_name}")
-    segments = create_segments(campaign_name)
+    segments = create_segments(campaign_name, step=step)
     print(f"Creating {len(segments)} clips")
     random.seed(101010102)
     random.shuffle(segments)
@@ -203,6 +203,8 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--campaign", help="Name of the campaign", required=True)
+    parser.add_argument("-s", "--step", help="How many seconds between start of each video", default=2, type=float)
+
     # parser.add_argument("-m", "--music_video", help="Music video path")
     # parser.add_argument("-f", "--offset", help="Skip more seconds at begining of background video", default=0, type=int)
     args = parser.parse_args()
@@ -210,7 +212,7 @@ def main():
     if args.campaign == 'all':
         all()
     else:
-        process_campaign(args.campaign)
+        process_campaign(args.campaign, step=args.step)
 
 
 if __name__ == '__main__':
