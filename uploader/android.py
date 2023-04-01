@@ -4,7 +4,15 @@ import time
 import traceback
 from urllib.parse import quote
 import yaml
-
+import logging as log
+log.basicConfig(
+    level=log.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        log.FileHandler("tms.log"),
+        log.StreamHandler()
+    ]
+)
 import uiautomator2
 
 # MUST_WAIT_ORIGINAL = uiautomator2.UiObject.must_wait
@@ -76,15 +84,15 @@ def must_wait_recover(must_wait_func):
         try:
             return must_wait_func(*args, **kwargs)
         except uiautomator2.exceptions.UiObjectNotFoundError as e:
-            print(f"Intercepted must wait exception")
+            log.info(f"Intercepted must wait exception")
             d = args[0].session
 
             if recover(d):
-                print(f"\tRecovered!")
+                log.info(f"\tRecovered!")
                 time.sleep(1)
                 return must_wait_func(*args, **kwargs)
             else:
-                print(f"\tDid not recover...")
+                log.warn(f"\tDid not recover...")
                 log_state(d)
 
                 # TODO send telegram
@@ -98,24 +106,21 @@ def must_wait_recover(must_wait_func):
 uiautomator2.UiObject.must_wait = must_wait_recover(uiautomator2.UiObject.must_wait)
 
 
-
-
-
 def retry(func, times=3):
     def wrapper(*args, **kwargs):
         for i in range(times):
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                print(f"{func.__name__} failed {i}")
+                log.warn(f"{func.__name__} failed {i}")
 
                 # get device reference
-                d = args[0]
-                if type(d) != uiautomator2.Device:
-                    if 'd' in kwargs and type(kwargs['d']) == uiautomator2.Device:
-                        d = kwargs['d']
-                    else:
-                        raise Exception(f"Cannot try to recover when device is not in arguments!")
+                d = None
+                
+                if args and type(args[0]) != uiautomator2.Device:
+                    d = args[0]
+                if 'd' in kwargs and type(kwargs['d']) == uiautomator2.Device:
+                    d = kwargs['d']
 
                 # Reached end of retries.
                 if i == times - 1:
@@ -123,47 +128,52 @@ def retry(func, times=3):
                     # with open('dump.xml', 'w') as file:
                     #     file.write(d.dump_hierarchy())
                     # TODO send telegram
-                    log_state(d)
+                    if d:
+                        log_state(d)
                     raise e
 
                 # here we retry, also try to recover from popups and other problems
-                recover(d)
+                if d:
+                    recover(d)
+                else:
+                    log.warn(f"Cannot recover in retry, not device argument.")
     return wrapper
 
 
 
 
-def switch_to_account(d, display_name):
+def switch_to_account(d, username, display_name):
     d(text='Profile').click()
     
     account_switcher = d(index=0, className='android.widget.TextView', clickable=True, textMatches='.{5,}')[0]
-    print(account_switcher.get_text())
+    log.info(f"Currently on account: {account_switcher.get_text()}")
     if account_switcher.get_text() == display_name:
-        print(f"Already at on account {display_name}")
+        log.info(f"Already at on account {display_name}")
         return
     else:
         account_switcher.click()
-        d(text=display_name).click()
-        print(f"Switched to new account")
+        d(textMatches=f"{display_name}|{username}").click()
+        log.info(f"Switched to new account {username}")
     
 
 def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
     title = title + ' ' + ' '.join(['#' + t for t in tags])
 
     if sound_url:
-        print(f"Opening sound {sound_url}")
+        log.info(f"Opening sound {sound_url}")
         d.open_url(sound_url)
         time.sleep(3)
 
         d(text='Use this sound').click()
     else:
-        print('Clicking upload button')
+        log.info('Clicking upload button')
         d(index=2, className='android.widget.FrameLayout')[-1].click()
 
     # "upload" button
     d(text='Upload').click()
 
     d(text='Videos').click()
+    time.sleep(2)
 
     # Click first video
     d(textMatches='\d\d:\d\d')[0].click()
@@ -172,22 +182,22 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
         d(text='Next').click()
 
     if sound_url:
-        time.sleep(2)
-        print(f"Clicking sound name {sound_name}")
+        time.sleep(5)
+        log.info(f"Clicking sound name {sound_name}")
         d(textMatches=f'{sound_name}.*').click()
 
         d(text='Volume').click()
         time.sleep(3)
 
         if device == 'redminote':
-            print("Set original sound to 100%")
+            log.info("Set original sound to 100%")
             d.click(685, 1728)
-            print("Set added sound to 1%")
+            log.info("Set added sound to 1%")
             d.click(350, 1934)
-        elif device == 'j7':
-            print("Set original sound to 100%")
+        elif device.startswith('j7'):
+            log.info("Set original sound to 100%")
             d.click(466, 929)
-            print("Set added sound to 1%")
+            log.info("Set added sound to 1%")
             d.click(256, 1079)
         else:
             raise Exception(f"Unsupported device {device}")
@@ -196,12 +206,15 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
 
     d(text='Next').click()
 
-    d(textMatches='Describe your post.*').set_text(title)
+    d(textMatches='(Describe your post|Share your thoughts).*').set_text(title)
     time.sleep(2)
     d.press('back')
     time.sleep(1)
 
-    print('Posting video')
+    # log.info('Disable save to device')
+    # d(text='Save to device').click()
+
+    log.info('Posting video')
     d(text='Post')[-1].click()
     time.sleep(3)
 
@@ -216,7 +229,7 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
 @retry
 def get_link(d):
     # wait for video to be opened
-    print("Waiting for video to open!")
+    log.info("Waiting for video to open!")
     good = False
     for i in range(30):
         if len(d(text='0')) == 3:
@@ -228,7 +241,7 @@ def get_link(d):
         d(text='Profile').click()
         d(index=0, className="androidx.recyclerview.widget.RecyclerView").child()[0].click()
 
-    print(f"Video opened!")
+    log.info(f"Video opened!")
 
     # Save linka
     d(index=5, clickable=True, focusable=True).click()
@@ -240,7 +253,7 @@ def get_link(d):
     d(textMatches='Paste|PASTE').click()
 
     link = d(focused=True).get_text()
-    print(link)
+    log.info(link)
     return link
 
 
@@ -263,13 +276,37 @@ def transfer_video(d, video_path, device):
                 raise Exception(f"Video {video_path} transfered but not found in files.")
 
         refresh_videos(d)
-    elif device == 'j7':
-        url = f'http://100.115.146.73:8000/{quote(video_path[len("creator/data/"):])}'
-        # print(url)
+    elif device.startswith('j7'):
+        log.info(f"Deleting all downloaded videos...")
+        d.shell('rm /storage/self/primary/Download/*')
+
+        url = f'http://100.115.146.73:8000/{quote(video_path)}'
+        # log.info(url)
         # quit()
+        log.info(f"Fetching new video on url {url}")
         d.open_url(url)
-        d(text='Downloads').click()
+        time.sleep(5)
+
+        log.info(f"Clicking Download button if it exists...")
+        if d(text='Download').exists():
+            log.info(f"It exists, clicking...")
+            d(text='Download').click()
+        
+        d.open_url('http://about:blank')
         time.sleep(10)
+
+        log.info("Opening files app...")
+        d.app_stop('com.sec.android.app.myfiles')
+        d.app_start('com.sec.android.app.myfiles')
+        log.info("Clicking videos...")
+        d(text='Videos').click()
+        log.info("Clicking Download...")
+        d(text='Download').click()
+
+        if not d(textMatches=f'.*{video_name}').exists():
+            raise Exception(f"Video {video_path} transfered but not found in files.")
+
+        log.info(f"Video found in files!, done!")
 
         # import code
         # code.interact(local=locals())
@@ -279,6 +316,7 @@ def transfer_video(d, video_path, device):
         raise Exception(f"Unsupported device {device}")
 
 
+@retry
 def upload_video(account, video, title, tags, sound_url, sound_name, device_id, device):
     d = uiautomator2.connect(device_id) # connect to device
     d.implicitly_wait(20)
@@ -287,26 +325,34 @@ def upload_video(account, video, title, tags, sound_url, sound_name, device_id, 
         if not account.name:
             raise Exception(f"Account name empty")
 
-        d.unlock()
+        log.info(f"Connecting to adb...")
+        adb_connect(device_id)
+        time.sleep(1)
 
-        print(f"Transfering video {video} to device {d}")
+        log.info(f"Unlocking device {device}")
+        d.screen_off()
+        time.sleep(1)
+        d.unlock()
+        time.sleep(3)
+        
+        log.info(f"Transfering video {video} to device {d}")
         transfer_video(d, video, device)
         time.sleep(3)
         
-        print("Opening tiktok app")
+        log.info("Opening tiktok app")
         d.app_stop('com.zhiliaoapp.musically')
         d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
         time.sleep(3)
         
-        print(f"Switching tiktok to account {account.username},{account.name}")
-        switch_to_account(d, account.name)
+        log.info(f"Switching tiktok to account {account.username},{account.name}")
+        switch_to_account(d, account.username, account.name)
         time.sleep(10)
 
-        print(f"Uploading video...")
+        log.info(f"Uploading video...")
         upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device)
         return d
     except Exception as e:
-        print(f"Upload failed with {e}")
+        log.info(f"Upload failed with {e}")
 
         log_state(d)
 
@@ -316,6 +362,7 @@ def upload_video(account, video, title, tags, sound_url, sound_name, device_id, 
 
 def cleanup(d):
     d.app_stop('com.zhiliaoapp.musically')
+    d.screen_off()
 
 
 def find(d, nodes):
@@ -372,10 +419,10 @@ def find(d, nodes):
 
 
 def adb_connect(device_id):
-    cmd = subprocess.run(["adb", "connect", device_id])
+    cmd = subprocess.run(f'adb connect {device_id}', shell=True)
     cmd.check_returncode()
 
-            
+
 def main():
     global INTERACTIVE
     INTERACTIVE=True
