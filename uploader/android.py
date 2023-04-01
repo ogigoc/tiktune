@@ -79,20 +79,20 @@ def log_state(d):
     d.screenshot(f'{logfile_name}.jpg')
 
 
-def must_wait_recover(must_wait_func):
+def uiobject_func_wrapper(func):
     def wrapper(*args, **kwargs):
         try:
-            return must_wait_func(*args, **kwargs)
+            return func(*args, **kwargs)
         except uiautomator2.exceptions.UiObjectNotFoundError as e:
-            log.info(f"Intercepted must wait exception")
+            log.info(f"Intercepted UIObjectNotFound exception for function {func.__name__}")
             d = args[0].session
 
             if recover(d):
                 log.info(f"\tRecovered!")
                 time.sleep(1)
-                return must_wait_func(*args, **kwargs)
+                return func(*args, **kwargs)
             else:
-                log.warn(f"\tDid not recover...")
+                log.warning(f"\tDid not recover...")
                 log_state(d)
 
                 # TODO send telegram
@@ -103,7 +103,8 @@ def must_wait_recover(must_wait_func):
     return wrapper
 
 
-uiautomator2.UiObject.must_wait = must_wait_recover(uiautomator2.UiObject.must_wait)
+uiautomator2.UiObject.must_wait = uiobject_func_wrapper(uiautomator2.UiObject.must_wait)
+uiautomator2.UiObject.click = uiobject_func_wrapper(uiautomator2.UiObject.click)
 
 
 def retry(func, times=3):
@@ -112,7 +113,7 @@ def retry(func, times=3):
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                log.warn(f"{func.__name__} failed {i}")
+                log.warning(f"{func.__name__} failed {i}")
 
                 # get device reference
                 d = None
@@ -136,7 +137,7 @@ def retry(func, times=3):
                 if d:
                     recover(d)
                 else:
-                    log.warn(f"Cannot recover in retry, not device argument.")
+                    log.warning(f"Cannot recover in retry, not device argument.")
     return wrapper
 
 
@@ -270,7 +271,6 @@ def transfer_video(d, video_path, device):
         def refresh_videos(d):
             time.sleep(4)
             d.swipe_ext('down')
-            d(text=video_name)
 
             if not d(text=video_name).exists():
                 raise Exception(f"Video {video_path} transfered but not found in files.")
