@@ -82,9 +82,9 @@ j7vasa_8:
   device_id: 100.105.200.128
   videos_per_campaign:
     tisita: 1
-    
-# s5:
-#   name: s5
-#   device_id: 100.97.245.82
-#   videos_per_campaign:
-#     onazna: 1
+
+k22_1:
+  name: k22_1
+  device_id: c05dca68
+  videos_per_campaign:
+    minailegal: 1

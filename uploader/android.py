@@ -228,6 +228,9 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
             d.click(466, 929)
             log.info("Set added sound to 1%")
             d.click(256, 1079)
+        elif device.startswith('k22'):
+            import code
+            code.interact(local=locals())
         else:
             raise Exception(f"Unsupported device {device}")
 
@@ -344,6 +347,23 @@ def transfer_video(d, video_path, device):
         # import code
         # code.interact(local=locals())
         # >>> d.shell('ls storage/self/primary/DCIM/Camera').output.replace('\n', ' ')
+    elif device.startswith('k22'):
+        log.info(f"Deleting all downloaded videos...")
+        d.shell('rm /storage/self/primary/Download/*')
+        d.shell('rm /storage/self/primary/DCIM/Camera/*')
+        
+        d.push(video_path, f'/storage/self/primary/Download/{video_name}')
+
+        time.sleep(3)
+        
+        d.app_stop('com.google.android.apps.nbu.files')
+        d.app_start('com.google.android.apps.nbu.files', '.home.HomeActivity')
+        d(text='Downloads').click()
+        
+        if not d(text=video_name).exists() and not d(text='‎' + video_name).exists():
+            raise Exception(f"Video {video_path} transfered but not found in files.")
+
+        log.info(f"Video found in files!, done!")
 
     else:
         raise Exception(f"Unsupported device {device}")

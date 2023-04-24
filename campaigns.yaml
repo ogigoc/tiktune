@@ -251,7 +251,7 @@ tisita:
 minailegal:
   name: minailegal
   gdrive_dir: null
-  local_dir: drive_videos/TikTok/minailegal/
+  local_dir: creator/data/minailegal/results/
   sound_name: Ilegal
   sound_url: https://www.tiktok.com/music/Ilegal-7215240089084004354
   tags:
