@@ -1,67 +1,90 @@
 desk:
   name: desk
   videos_per_campaign:
-    montana: 2
-    placikunivici: 3
-    pcela: 2
-    onazna: 2
-    ljubavnarepeat: 5
-    tisita: 1
+    montana: 5
+    minailegal: 3
+    nijenijelako: 3
+    zapravosutu: 3
+    zoziambijent: 1
+    pitbcndrill: 1
 
 redminote:
   name: redminote
   device_id: 3646ec0f
   videos_per_campaign:
     minailegal: 1
-    levonn: 1
     montana: 1
-    placikunivici: 2
-    pcela: 0
-    onazna: 1
-    ljubavnarepeat: 1
-    belebembare: 1
-    rari: 0
+    nijenijelako: 2
+    zapravosutu: 2
+    zoziambijent: 1
+    pitbcndrill: 1
 
 j7:
   name: j7
   device_id: 100.99.18.17
   videos_per_campaign:
-    montana: 1
-    placikunivici: 2
-    onazna: 1
-    tisita: 1
-    pcela: 1
+    montana: 2
+    minailegal: 1
+    nijenijelako: 1
+    zapravosutu: 2
     
 j7_2:
   name: j7_2
-  # device_id: 100.77.209.31
-  device_id: j7-2
+  device_id: 100.77.209.31
   videos_per_campaign:
-    pcela: 1
-    rari: 1
-    placikunivici: 1
     minailegal: 1
-    montana: 1
-
+    montana: 2
+    nijenijelako: 1
+    zapravosutu: 1
+    
 j7_3:
   name: j7_3
-  # device_id: 100.106.187.72
-  device_id: j7-3
+  device_id: 100.106.187.72
   videos_per_campaign:
-    placikunivici: 2
-    onazna: 1
-    montana: 1
-    tisita: 1
+    montana: 2
+    minailegal: 1
+    nijenijelako: 1
+    zapravosutu: 1
 
 j7_4:
   name: j7_4
-  # device_id: 100.106.187.72
-  device_id: j7-4
+  device_id: 100.76.20.44
   videos_per_campaign:
-    placikunivici: 0
+    zapravosutu: 1
+    montana: 1
+    nijenijelako: 0
+    minailegal: 1
+    
+j7_5:
+  name: j7_5
+  device_id: 100.98.41.75
+  videos_per_campaign:
+    montana: 1
+    minailegal: 1
 
-s5:
-  name: s5
-  device_id: 100.97.245.82
+j7ana_6:
+  name: j7ana_6
+  device_id: 100.79.143.93
   videos_per_campaign:
-    onazna: 1
+    montana: 1
+    minailegal: 1
+    zapravosutu: 1
+    nijenijelako: 1
+
+j7pro_7:
+  name: j7pro_7
+  device_id: 100.122.123.28
+  videos_per_campaign:
+    tisita: 1
+
+j7vasa_8:
+  name: j7vasa_8
+  device_id: 100.105.200.128
+  videos_per_campaign:
+    tisita: 1
+    
+# s5:
+#   name: s5
+#   device_id: 100.97.245.82
+#   videos_per_campaign:
+#     onazna: 1

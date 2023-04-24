@@ -230,7 +230,7 @@ montana:
 tisita:
   name: tisita
   gdrive_dir: null
-  local_dir: drive_videos/TikTok/tisita/
+  local_dir: creator/data/tisita/results/
   sound_name: null
   sound_url: null
   tags:
@@ -295,3 +295,101 @@ levonn:
   - Ne mogu da prestanem da slušam! Levonn - Nema me
   - Levonn - Nema me
   - Levonn - Nema me
+
+nijenijelako:
+  name: nijenijelako
+  gdrive_dir: null
+  local_dir: creator/data/nijenijelako/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - nijenijelako
+  - gagakorg
+  - fyp
+  - bakaprase
+  - choda
+  - srbija
+  - hit
+  titles:
+  - Gaga - Nije nije lako @gagakorg1
+  - Gaga - Nije nije lako @gagakorg1
+  - Gaga - Nije nije lako @gagakorg1
+  - Kida pesma!! @gagakorg1 Gaga - Nije nije lako
+  - Poludela sam za ovim... @gagakorg1 Gaga - Nije nije lako
+  - Drugarica me je navukla na ovo @gagakorg1 Gaga - Nije nije lako
+  - Na repeatu mi je danima @gagakorg1 Gaga - Nije nije lako
+  - Ovo je prava stvar @gagakorg1 Gaga - Nije nije lako
+
+zapravosutu:
+  name: zapravosutu
+  gdrive_dir: null
+  local_dir: creator/data/zapravosutu/results/
+  sound_name: original sound
+  sound_url: https://www.tiktok.com/music/original-sound-7223481514267282182
+  tags:
+  - zapravosutu
+  - mega
+  - drill
+  - balkan
+  - fyp
+  - bakaprase
+  - srbija
+  - hit
+  titles:
+  - Mega - Zapravo su tu
+  - Mega - Zapravo su tu
+  - Koliko jaka pesma, jedva cekam da izadje! Mega - Zapravo su tu
+  - Kidanje!!! Mega - Zapravo su tu
+  - Koliko vec cekam ovu pesmu niste svesni... Mega - Zapravo su tu
+  - Ne mogu da docekam da se ovo proslavi! Mega - Zapravo su tu
+  - Ovo ce biti pravi hit! Mega - Zapravo su tu
+  - Nova pesma, novi hit! Mega - Zapravo su tu
+
+zoziambijent:
+  name: zoziambijent
+  gdrive_dir: null
+  local_dir: creator/data/zoziambijent/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - zoziambijent
+  - zozi
+  - fyp
+  - trap
+  - bassivity
+  - srbija
+  - muzika
+  titles:
+  - Kako ovo ranije nisam cula? Zozi - Ambijent
+  - Drugarica kaze da joj je ovo omiljena pesma sta mislite? Zozi - Ambijent
+  - Zozi - Ambijent
+  - Zozi - Ambijent
+  - Slusajte ovo! Zozi - Ambijent
+  - Ne mogu da verujem koliko kida! Zozi - Ambijent
+  - Ko jos nije cuo ovu pesmu, obavezno poslusajte! Zozi - Ambijent
+
+pitbcndrill:
+  name: pitbcndrill
+  gdrive_dir: null
+  local_dir: creator/data/pitbcndrill/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - pitbcndrill
+  - crnicerak
+  - drill
+  - fyp
+  - seksi
+  - pit
+  - srbija
+  - rep
+  - hiphop
+  - muzika
+  titles:
+  - Jos jedan drill artist se probija! Pit - BCN Drill
+  - Drill u Srbiji sve bolji... Pit - BCN Drill
+  - Ubio traku - Pit - BCN Drill
+  - Buduci kralj srpskog drilla - Pit - BCN Drill
+  - Srpska drill scena dobila novog talenta - Pit - BCN Drill
+  - Brutalna lirika i tezak flow - Pit - BCN Drill
+  - Surovi zvuk i stil - Pit - BCN Drill

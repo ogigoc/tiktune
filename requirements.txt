@@ -5,4 +5,4 @@ google-auth-oauthlib==0.8.0
 PyDrive2==1.15.0
 pandas==1.5.3
 gspread==5.7.2
-uiautomator2==2.16.22
+uiautomator2[image]==2.16.22

@@ -69,11 +69,19 @@ def recover(d):
         d(clickable=True)[1].click()
         return True
 
+    if d(text='Privacy Policy Update').exists():
+        d(text="OK").click()
+        return True
+
     return False
 
+def record_screen(d, device):
+    output_path = f"uploader/logs/video/{device}_{str(datetime.now()).split('.')[0].replace(' ', '_')}.mp4"
+    log.info(f"Recording screen for {device} to {output_path}")
+    d.screenrecord(output_path)
 
 def log_state(d):
-    logfile_name = 'uploader/logs/' + str(datetime.now()).split('.')[0].replace(' ', '_')
+    logfile_name = 'uploader/logs/all/' + str(datetime.now()).split('.')[0].replace(' ', '_')
     # dump xml
     open(f'{logfile_name}.xml', 'w').write(d.dump_hierarchy())
     d.screenshot(f'{logfile_name}.jpg')
@@ -142,13 +150,21 @@ def retry(func, times=3):
 
 
 
-
+@retry
 def switch_to_account(d, username, display_name):
+    log.info("Opening tiktok app")
+    d.app_stop('com.zhiliaoapp.musically')
+    d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
+    time.sleep(3)
+
     d(text='Profile').click()
-    
-    account_switcher = d(index=0, className='android.widget.TextView', clickable=True, textMatches='.{5,}')[0]
-    log.info(f"Currently on account: {account_switcher.get_text()}")
-    if account_switcher.get_text() == display_name:
+    time.sleep(10)
+
+    recover(d)
+    account_switcher = d(index=0, className='android.widget.TextView', clickable=True, textMatches='.{3,}')[0]
+    account_text = account_switcher.get_text()
+    log.info(f"Currently on account: {account_text}")
+    if account_text == display_name:
         log.info(f"Already at on account {display_name}")
         return
     else:
@@ -156,8 +172,14 @@ def switch_to_account(d, username, display_name):
         d(textMatches=f"{display_name}|{username}").click()
         log.info(f"Switched to new account {username}")
     
-
+@retry
 def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
+    log.info("Opening tiktok app")
+    d.app_stop('com.zhiliaoapp.musically')
+    d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
+    time.sleep(3)
+    
+    
     title = title + ' ' + ' '.join(['#' + t for t in tags])
 
     if sound_url:
@@ -178,9 +200,10 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
 
     # Click first video
     d(textMatches='\d\d:\d\d')[0].click()
+    time.sleep(10)
 
-    if device == 'redminote':
-        d(text='Next').click()
+    # if device == 'redminote':
+    #     d(text='Next').click()
 
     if sound_url:
         time.sleep(5)
@@ -195,6 +218,11 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
             d.click(685, 1728)
             log.info("Set added sound to 1%")
             d.click(350, 1934)
+        elif device == 'j7ana_6':
+            log.info("Set original sound to 100%")
+            d.click(680, 1460)
+            log.info("Set added sound to 1%")
+            d.click(336, 1656)
         elif device.startswith('j7'):
             log.info("Set original sound to 100%")
             d.click(466, 929)
@@ -207,26 +235,28 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
 
     d(text='Next').click()
 
-    d(textMatches='(Describe your post|Share your thoughts).*').set_text(title)
-    time.sleep(2)
+    d(textMatches="(Describe your post|Share your thoughts|Share what).*").set_text(title)
+    time.sleep(10)
     d.press('back')
-    time.sleep(1)
+    time.sleep(3)
 
     # log.info('Disable save to device')
     # d(text='Save to device').click()
 
     log.info('Posting video')
     d(text='Post')[-1].click()
-    time.sleep(3)
+    time.sleep(5)
 
     if d(text='Post video').exists():
         d(text='Post video').click()
 
-    time.sleep(1)
+    time.sleep(5)
 
     if d(textMatches='Post [nN]ow').exists():
         d(textMatches='Post [nN]ow').click()
-        
+    
+    time.sleep(20)
+
 @retry
 def get_link(d):
     # wait for video to be opened
@@ -257,7 +287,7 @@ def get_link(d):
     log.info(link)
     return link
 
-
+@retry
 def transfer_video(d, video_path, device):
     video_name = video_path.split('/')[-1]
     if device == 'redminote':
@@ -269,8 +299,9 @@ def transfer_video(d, video_path, device):
 
         @retry
         def refresh_videos(d):
-            time.sleep(4)
+            time.sleep(2)
             d.swipe_ext('down')
+            time.sleep(2)
 
             if not d(text=video_name).exists():
                 raise Exception(f"Video {video_path} transfered but not found in files.")
@@ -279,18 +310,20 @@ def transfer_video(d, video_path, device):
     elif device.startswith('j7'):
         log.info(f"Deleting all downloaded videos...")
         d.shell('rm /storage/self/primary/Download/*')
+        d.shell('rm /storage/self/primary/DCIM/Camera/*')
 
-        url = f'http://100.115.146.73:8000/{quote(video_path)}'
+        url = f'http://100.115.146.73:8080/{quote(video_path)}'
         # log.info(url)
         # quit()
         log.info(f"Fetching new video on url {url}")
         d.open_url(url)
-        time.sleep(5)
+        time.sleep(10)
 
         log.info(f"Clicking Download button if it exists...")
         if d(text='Download').exists():
             log.info(f"It exists, clicking...")
             d(text='Download').click()
+        time.sleep(10)
         
         d.open_url('http://about:blank')
         time.sleep(10)
@@ -303,7 +336,7 @@ def transfer_video(d, video_path, device):
         log.info("Clicking Download...")
         d(text='Download').click()
 
-        if not d(textMatches=f'.*{video_name}').exists():
+        if not d(text=video_name).exists() and not d(text='‎' + video_name).exists():
             raise Exception(f"Video {video_path} transfered but not found in files.")
 
         log.info(f"Video found in files!, done!")
@@ -316,11 +349,11 @@ def transfer_video(d, video_path, device):
         raise Exception(f"Unsupported device {device}")
 
 
-@retry
 def upload_video(account, video, title, tags, sound_url, sound_name, device_id, device):
     d = uiautomator2.connect(device_id) # connect to device
     d.implicitly_wait(20)
 
+    recording = False
     try:
         if not account.name:
             raise Exception(f"Account name empty")
@@ -328,6 +361,10 @@ def upload_video(account, video, title, tags, sound_url, sound_name, device_id, 
         log.info(f"Connecting to adb...")
         adb_connect(device_id)
         time.sleep(1)
+
+        if device == 'j7':
+            record_screen(d, device)
+            recording = True
 
         log.info(f"Unlocking device {device}")
         d.screen_off()
@@ -338,26 +375,33 @@ def upload_video(account, video, title, tags, sound_url, sound_name, device_id, 
         log.info(f"Transfering video {video} to device {d}")
         transfer_video(d, video, device)
         time.sleep(3)
-        
-        log.info("Opening tiktok app")
-        d.app_stop('com.zhiliaoapp.musically')
-        d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
-        time.sleep(3)
-        
+                
         log.info(f"Switching tiktok to account {account.username},{account.name}")
         switch_to_account(d, account.username, account.name)
         time.sleep(10)
 
         log.info(f"Uploading video...")
         upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device)
+
+        if recording:
+            d.screenrecord.stop()
+            recording = False
+
         return d
     except Exception as e:
+        if recording:
+            d.screenrecord.stop()
+            recording = False
         log.info(f"Upload failed with {e}")
 
         log_state(d)
 
         traceback.print_exc()
         raise e
+
+    if recording:
+        d.screenrecord.stop()
+        recording = False
 
 
 def cleanup(d):
@@ -417,7 +461,7 @@ def find(d, nodes):
 #     d(text='Next').click()
 #     d.send_keys('Dijana Music')
 
-
+@retry
 def adb_connect(device_id):
     cmd = subprocess.run(f'adb connect {device_id}', shell=True)
     cmd.check_returncode()
