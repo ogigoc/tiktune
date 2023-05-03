@@ -379,17 +379,114 @@ pitbcndrill:
   - crnicerak
   - drill
   - fyp
-  - seksi
   - pit
-  - srbija
-  - rep
-  - hiphop
-  - muzika
   titles:
+  - Pit - BCN Drill
+  - Pit - BCN Drill
   - Jos jedan drill artist se probija! Pit - BCN Drill
   - Drill u Srbiji sve bolji... Pit - BCN Drill
-  - Ubio traku - Pit - BCN Drill
-  - Buduci kralj srpskog drilla - Pit - BCN Drill
-  - Srpska drill scena dobila novog talenta - Pit - BCN Drill
-  - Brutalna lirika i tezak flow - Pit - BCN Drill
-  - Surovi zvuk i stil - Pit - BCN Drill
+  - Ubio traku Pit - BCN Drill
+  - Buduci kralj srpskog drilla Pit - BCN Drill
+  - Srpska drill scena dobila novog talenta Pit - BCN Drill
+  - Brutalna lirika i tezak flow Pit - BCN Drill
+  - Surovi zvuk i stil Pit - BCN Drill
+
+shozeocinamene:
+  name: shozeocinamene
+  gdrive_dir: null
+  local_dir: creator/data/shozeocinamene/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - shozeocinamene
+  - fyp
+  - rouzi
+  - bassivity
+  - chill
+  - srbija
+  - muzika
+  - hit
+  titles:
+  - Shoze - Oci na mene
+  - Shoze - Oci na mene
+  - Odavno nisam cula nesto ovako dobro! Shoze - Oci na mene
+  - Kidanje...nemam sta da dodam Shoze - Oci na mene
+  - Shoze - Oci na mene
+  - Ova pesma mi ne izlazi iz glave! Shoze - Oci na mene
+  - Zaljubila sam se u ovaj hit Shoze - Oci na mene
+  - Nekako umirujuće, ali i zarazno Shoze - Oci na mene
+  - Svaki put kad slušam, sve mi se više sviđa Shoze - Oci na mene
+
+pcelaalukard:
+  name: pcelaalukard
+  gdrive_dir: null
+  sound_name: Alukard
+  sound_url: https://www.tiktok.com/music/Alukard-7226881293190432769
+  local_dir: creator/data/pcelaalukard/results/
+  tags:
+  - pcelaalukard
+  - pcela
+  - bassivity
+  - cc
+  - fyp
+  - srbija
+  - muzika
+  - rap
+  titles:
+  - Pcela - Alukard
+  - Pcela - Alukard
+  - Pcela opet ubija... Pcela - Alukard
+  - Kako ovo nisam cuo ranije??? Pcela - Alukard
+  - Ne mogu da verujem koliko je dobar! Pcela - Alukard
+  - Slusam ovo na repeat... Pcela - Alukard
+  - Ne znam sta bih rekla, samo slusam... Pcela - Alukard
+  - Vraća se na velika vrata! Pcela - Alukard
+
+bralegdesi:
+  name: bralegdesi
+  gdrive_dir: null
+  local_dir: creator/data/bralegdesi/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - bralegdesi
+  - brale
+  - trep
+  - srbija
+  - fyp
+  - bakaprase
+  - muzika
+  - balkan
+  titles:
+  - Brale x MCRAE - Gde si
+  - Brale x MCRAE - Gde si
+  - Koliko kida lik... Brale x MCRAE - Gde si
+  - Jedna od boljih pesama koje sam čula Brale x MCRAE - Gde si
+  - Brale x MCRAE - Gde si
+  - Ova pesma mi ne izlazi iz glave Brale x MCRAE - Gde si
+  - Pravi hit Brale x MCRAE - Gde si
+  - Kakav tandem Brale x MCRAE - Gde si
+
+kanemonaliza:
+  name: kanemonaliza
+  gdrive_dir: null
+  local_dir: creator/data/kanemonaliza/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - kanemonaliza
+  - kane
+  - fyp
+  - bakaprase
+  - bassivity
+  - srbija
+  - muzika
+  - hit
+  titles:
+  - Kane - Mona Liza
+  - Kane - Mona Liza
+  - Kane - Mona Liza
+  - Bolji od Voyage-a... Kane - Mona Liza
+  - Ubija ova pesma Kane - Mona Liza
+  - Ne mogu da prestanem da je slušam Kane - Mona Liza
+  - Zarazna pesma Kane - Mona Liza

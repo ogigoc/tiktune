@@ -1,90 +1,123 @@
 desk:
   name: desk
   videos_per_campaign:
-    montana: 5
-    minailegal: 3
-    nijenijelako: 3
-    zapravosutu: 3
-    zoziambijent: 1
-    pitbcndrill: 1
+    nijenijelako: 5
+    pcelaalukard: 2
+    zoziambijent: 3
+    pitbcndrill: 3
+    shozeocinamene: 3
 
 redminote:
   name: redminote
   device_id: 3646ec0f
   videos_per_campaign:
-    minailegal: 1
-    montana: 1
+    pcelaalukard: 1
+    zoziambijent: 2
+    pitbcndrill: 2
     nijenijelako: 2
-    zapravosutu: 2
-    zoziambijent: 1
-    pitbcndrill: 1
+    shozeocinamene: 1
 
 j7:
   name: j7
   device_id: 100.99.18.17
   videos_per_campaign:
-    montana: 2
-    minailegal: 1
-    nijenijelako: 1
-    zapravosutu: 2
+    pcelaalukard: 1
+    zoziambijent: 1
+    pitbcndrill: 1
+    nijenijelako: 2
+    shozeocinamene: 1
     
 j7_2:
   name: j7_2
   device_id: 100.77.209.31
   videos_per_campaign:
-    minailegal: 1
-    montana: 2
-    nijenijelako: 1
-    zapravosutu: 1
+    zoziambijent: 1
+    nijenijelako: 2
+    pcelaalukard: 1
+    shozeocinamene: 1
     
 j7_3:
   name: j7_3
   device_id: 100.106.187.72
   videos_per_campaign:
-    montana: 2
-    minailegal: 1
-    nijenijelako: 1
-    zapravosutu: 1
+    nijenijelako: 2
+    pitbcndrill: 1
+    zoziambijent: 1
+    shozeocinamene: 1
 
 j7_4:
   name: j7_4
   device_id: 100.76.20.44
   videos_per_campaign:
-    zapravosutu: 1
-    montana: 1
-    nijenijelako: 0
-    minailegal: 1
+    pcelaalukard: 1
+    nijenijelako: 1
+    pitbcndrill: 1
     
 j7_5:
   name: j7_5
   device_id: 100.98.41.75
   videos_per_campaign:
-    montana: 1
-    minailegal: 1
+    nijenijelako: 1
+    pitbcndrill: 1
 
 j7ana_6:
   name: j7ana_6
   device_id: 100.79.143.93
   videos_per_campaign:
-    montana: 1
-    minailegal: 1
-    zapravosutu: 1
+    pitbcndrill: 1
+    pcelaalukard: 1
     nijenijelako: 1
+    zoziambijent: 1
 
 j7pro_7:
   name: j7pro_7
   device_id: 100.122.123.28
   videos_per_campaign:
-    tisita: 1
+    nijenijelako: 1
 
 j7vasa_8:
   name: j7vasa_8
   device_id: 100.105.200.128
+
+j7old_9:
+  name: j7old_9
+  device_id: 100.125.251.115
+  anydesk_id: 624035055
+  phone_number: 0677318661
   videos_per_campaign:
-    tisita: 1
+  videos_per_campaign:
+    nijenijelako: 1
+    pitbcndrill: 1
 
 k22_1:
   name: k22_1
   device_id: c05dca68
   videos_per_campaign:
-    minailegal: 1
+    pcelaalukard: 1
+    zoziambijent: 1
+
+k22_2:
+  name: k22_2
+  device_id: 100.127.28.71
+  videos_per_campaign:
+    pcelaalukard: 1
+
+j7pro_10:
+  name: j7pro_10
+  device_id: 100.81.21.4
+  anydesk_id: 248910818
+  videos_per_campaign:
+    pcelaalukard: 1
+
+j7_11:
+  name: j7_11
+  device_id: 3300ca65558da24b
+  # device_id: 100.89.94.57
+  phone_number: 0677362918
+  anydesk_id: 814363188
+  videos_per_campaign:
+    pcelaalukard: 1
+
+lenovo1:
+  name: lenovo1
+  device_id: 5451e23e

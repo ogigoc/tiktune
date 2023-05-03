@@ -106,6 +106,7 @@ def do_campaign(campaign, active_accounts, videos, device):
                 log.error(f"{e}")
                 traceback.print_exc()
                 errors.append(str(e))
+                #android.cleanup(d)
 
     
 

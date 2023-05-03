@@ -1,3 +1,4 @@
+import random
 import subprocess
 from datetime import datetime
 import time
@@ -17,6 +18,8 @@ import uiautomator2
 
 # MUST_WAIT_ORIGINAL = uiautomator2.UiObject.must_wait
 INTERACTIVE = False
+ELEMENT_WAIT_TIMEOUT = 30
+TIKTOK_START_TIMEOUT = 120
 
 def recover(d):
     # Don't allow contacts or other permissions.
@@ -145,7 +148,7 @@ def retry(func, times=3):
                 if d:
                     recover(d)
                 else:
-                    log.warning(f"Cannot recover in retry, not device argument.")
+                    log.warning(f"Cannot recover in retry, no device argument.")
     return wrapper
 
 
@@ -157,7 +160,7 @@ def switch_to_account(d, username, display_name):
     d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
     time.sleep(3)
 
-    d(text='Profile').click()
+    select(d, timeout=TIKTOK_START_TIMEOUT, text='Profile').click()
     time.sleep(10)
 
     recover(d)
@@ -174,10 +177,6 @@ def switch_to_account(d, username, display_name):
     
 @retry
 def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
-    log.info("Opening tiktok app")
-    d.app_stop('com.zhiliaoapp.musically')
-    d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
-    time.sleep(3)
     
     
     title = title + ' ' + ' '.join(['#' + t for t in tags])
@@ -189,8 +188,13 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
 
         d(text='Use this sound').click()
     else:
+        log.info("Opening tiktok app")
+        d.app_stop('com.zhiliaoapp.musically')
+        d.app_start("com.zhiliaoapp.musically", 'com.ss.android.ugc.aweme.splash.SplashActivity') # start with package name
+        time.sleep(3)
+
         log.info('Clicking upload button')
-        d(index=2, className='android.widget.FrameLayout')[-1].click()
+        select(d, timeout=TIKTOK_START_TIMEOUT, index=2, className='android.widget.FrameLayout')[-1].click()
 
     # "upload" button
     d(text='Upload').click()
@@ -200,7 +204,7 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
 
     # Click first video
     d(textMatches='\d\d:\d\d')[0].click()
-    time.sleep(10)
+    time.sleep(30)
 
     # if device == 'redminote':
     #     d(text='Next').click()
@@ -223,14 +227,21 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
             d.click(680, 1460)
             log.info("Set added sound to 1%")
             d.click(336, 1656)
+        elif device.startswith('j7pro'):
+            log.info("Set original sound to 100%")
+            d(className='android.widget.SeekBar')[0].click(offset=(0.485, 0.5))
+            log.info("Set added sound to 1%")
+            d(className='android.widget.SeekBar')[1].click(offset=(0.041, 0.5))
         elif device.startswith('j7'):
             log.info("Set original sound to 100%")
             d.click(466, 929)
             log.info("Set added sound to 1%")
             d.click(256, 1079)
         elif device.startswith('k22'):
-            import code
-            code.interact(local=locals())
+            log.info("Set original sound to 100%")
+            d(className='android.widget.SeekBar')[0].click(offset=(0.48, 0.5))
+            log.info("Set added sound to 1%")
+            d(className='android.widget.SeekBar')[1].click(offset=(0.049, 0.5))
         else:
             raise Exception(f"Unsupported device {device}")
 
@@ -258,7 +269,7 @@ def upload_latest_video_to_sound(d, title, tags, sound_url, sound_name, device):
     if d(textMatches='Post [nN]ow').exists():
         d(textMatches='Post [nN]ow').click()
     
-    time.sleep(20)
+    time.sleep(40)
 
 @retry
 def get_link(d):
@@ -336,8 +347,10 @@ def transfer_video(d, video_path, device):
         d.app_start('com.sec.android.app.myfiles')
         log.info("Clicking videos...")
         d(text='Videos').click()
-        log.info("Clicking Download...")
-        d(text='Download').click()
+
+        if not device.startswith('j7old'):
+            log.info("Clicking Download...")
+            d(text='Download').click()
 
         if not d(text=video_name).exists() and not d(text='‎' + video_name).exists():
             raise Exception(f"Video {video_path} transfered but not found in files.")
@@ -351,16 +364,33 @@ def transfer_video(d, video_path, device):
         log.info(f"Deleting all downloaded videos...")
         d.shell('rm /storage/self/primary/Download/*')
         d.shell('rm /storage/self/primary/DCIM/Camera/*')
+        time.sleep(1)
         
+        log.info(f"Pushing  video {video_path} to device...")
         d.push(video_path, f'/storage/self/primary/Download/{video_name}')
 
-        time.sleep(3)
+        log.info(f"Frocing media scan...")
+        time.sleep(1)
+        output, code = d.shell(f'am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d "file:///storage/self/primary/Download/{video_name}"')
+        log.info(f"Media scan done! with code {code} and output {output}")
+        time.sleep(2)
         
         d.app_stop('com.google.android.apps.nbu.files')
         d.app_start('com.google.android.apps.nbu.files', '.home.HomeActivity')
         d(text='Downloads').click()
-        
+
+        time.sleep(5)
+
         if not d(text=video_name).exists() and not d(text='‎' + video_name).exists():
+            # # try internal storag first
+            # log.info(f"Video not found in downloads, trying internal storage...")
+            # d.app_stop('com.google.android.apps.nbu.files')
+            # d.app_start('com.google.android.apps.nbu.files', '.home.HomeActivity')
+            # d.swipe_ext('up')
+            # d(text='Internal Storage').click()
+            # d(text='Download').click()
+
+            # if not d(text=video_name).exists() and not d(text='‎' + video_name).exists():
             raise Exception(f"Video {video_path} transfered but not found in files.")
 
         log.info(f"Video found in files!, done!")
@@ -369,9 +399,43 @@ def transfer_video(d, video_path, device):
         raise Exception(f"Unsupported device {device}")
 
 
+@retry
+def unlock(d):
+    d.screen_off()
+    time.sleep(5)
+    d.unlock()
+    time.sleep(5)
+    
+    # output, code = d.shell(f'dumpsys window policy | grep isStatusBarKeyguard')
+    # if 'isStatusBarKeyguard=false' not in output:
+    #     log.warn(f"Unlock failed")
+    #     raise Exception(f"Device not unlocked")
+
+
+def select(d, timeout=ELEMENT_WAIT_TIMEOUT, **kwargs):
+    log.debug(f"Selecting {params_to_string(kwargs)}")
+
+    if d(**kwargs).exists():
+        return d(**kwargs)
+
+    end = time.time() + timeout
+
+    while time.time() < end:
+        if recover(d):
+            log.info(f"Recovered from popup")
+        
+        if d(**kwargs).exists():
+            return d(**kwargs)
+        
+        time.sleep(1)
+
+    raise Exception(f"Element {params_to_string(kwargs)} not found")
+
+
 def upload_video(account, video, title, tags, sound_url, sound_name, device_id, device):
     d = uiautomator2.connect(device_id) # connect to device
-    d.implicitly_wait(20)
+    d.implicitly_wait(30)
+    d.jsonrpc.setConfigurator({"waitForIdleTimeout": 100, 'waitForSelectorTimeout': 100})
 
     recording = False
     try:
@@ -387,10 +451,7 @@ def upload_video(account, video, title, tags, sound_url, sound_name, device_id, 
             recording = True
 
         log.info(f"Unlocking device {device}")
-        d.screen_off()
-        time.sleep(1)
-        d.unlock()
-        time.sleep(3)
+        unlock(d)
         
         log.info(f"Transfering video {video} to device {d}")
         transfer_video(d, video, device)
@@ -428,6 +489,13 @@ def cleanup(d):
     d.app_stop('com.zhiliaoapp.musically')
     d.screen_off()
 
+def params_to_string(params):
+    string_values = [
+        v[0].upper() + v[1:] if v in {'true', 'false'} else int(v) if v.isnumeric() else f'"{v}"'
+        for v in [str(val) for val in params.values()]
+    ]
+    return f'({", ".join(str(k) + "=" + str(v) for k,v in zip(params.keys(), string_values))})'
+
 
 def find(d, nodes):
     for node in nodes.split('\n'):
@@ -456,12 +524,7 @@ def find(d, nodes):
             if key in useful
         }
 
-        string_values = [
-            v[0].upper() + v[1:] if v in {'true', 'false'} else int(v) if v.isnumeric() else f'"{v}"'
-            for v in params.values()
-        ]
-
-        print(f'd({", ".join(str(k) + "=" + str(v) for k,v in zip(params.keys(), string_values))})')
+        print(f'd{params_to_string(params)}')
         print(len(d(**params)))
         print()
 
@@ -486,6 +549,22 @@ def adb_connect(device_id):
     cmd = subprocess.run(f'adb connect {device_id}', shell=True)
     cmd.check_returncode()
 
+
+def next_video(d):
+    d.swipe(
+        0.4 + random.uniform(-0.05, 0.05),
+        0.6 + random.uniform(-0.05, 0.05),
+        0.4 + random.uniform(-0.05, 0.05),
+        0.4 + random.uniform(-0.05, 0.05),
+        0.03,
+    )
+
+
+def infi_scroll(d):
+    while True:
+        time.sleep(random.uniform(1.2, 8))
+        log.info(f"Scrolling...")
+        next_video(d)
 
 def main():
     global INTERACTIVE
