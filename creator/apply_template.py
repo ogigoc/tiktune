@@ -57,7 +57,7 @@ class Segment():
         self.effect_name = effect_name
         self.output_dir = output_dir
         self.output_path = (
-            f'{output_dir}/{str(self.start).zfill(5)};{self.background.filename.split("/")[-1].replace("/", "").replace(";", "")};{self.template.filename.split("/")[-1]};'
+            f'{output_dir}/{str(round(self.start)).zfill(5)};{self.background.filename.split("/")[-1].replace("/", "").replace(";", "")};{self.template.filename.split("/")[-1]};'
             f'{self.effect_name}.mp4'
         )
     
@@ -65,15 +65,12 @@ class Segment():
         if not os.path.isdir(self.output_dir):
             os.makedirs(self.output_dir)
 
-        if not os.path.exists(self.output_path):
-            print(f"Rendering {self.output_path}")
-            result = CompositeVideoClip([
-                self.effect(self.background.subclip(self.start, self.start + self.template.duration).without_audio()),
-                self.template
-            ], size=self.template.size)
-            result.write_videofile(self.output_path)
-        else:
-            print(f"Skipping {self.output_path}, exists.")
+        print(f"Rendering {self.output_path}")
+        result = CompositeVideoClip([
+            self.effect(self.background.subclip(self.start, self.start + self.template.duration).without_audio()),
+            self.template
+        ], size=self.template.size)
+        result.write_videofile(self.output_path)
 
 
 def create_segments(campaign_name, step, bstart=3, bend=3):

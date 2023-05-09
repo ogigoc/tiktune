@@ -3,3 +3,5 @@ service_account.json
 drive_videos/
 profiles/
 **/__pycache__/
+logs.txt
+tmp.log

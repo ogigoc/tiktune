@@ -230,7 +230,7 @@ montana:
 tisita:
   name: tisita
   gdrive_dir: null
-  local_dir: drive_videos/TikTok/tisita/
+  local_dir: creator/data/tisita/results/
   sound_name: null
   sound_url: null
   tags:
@@ -251,7 +251,7 @@ tisita:
 minailegal:
   name: minailegal
   gdrive_dir: null
-  local_dir: drive_videos/TikTok/minailegal/
+  local_dir: creator/data/minailegal/results/
   sound_name: Ilegal
   sound_url: https://www.tiktok.com/music/Ilegal-7215240089084004354
   tags:
@@ -295,3 +295,198 @@ levonn:
   - Ne mogu da prestanem da slušam! Levonn - Nema me
   - Levonn - Nema me
   - Levonn - Nema me
+
+nijenijelako:
+  name: nijenijelako
+  gdrive_dir: null
+  local_dir: creator/data/nijenijelako/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - nijenijelako
+  - gagakorg
+  - fyp
+  - bakaprase
+  - choda
+  - srbija
+  - hit
+  titles:
+  - Gaga - Nije nije lako @gagakorg1
+  - Gaga - Nije nije lako @gagakorg1
+  - Gaga - Nije nije lako @gagakorg1
+  - Kida pesma!! @gagakorg1 Gaga - Nije nije lako
+  - Poludela sam za ovim... @gagakorg1 Gaga - Nije nije lako
+  - Drugarica me je navukla na ovo @gagakorg1 Gaga - Nije nije lako
+  - Na repeatu mi je danima @gagakorg1 Gaga - Nije nije lako
+  - Ovo je prava stvar @gagakorg1 Gaga - Nije nije lako
+
+zapravosutu:
+  name: zapravosutu
+  gdrive_dir: null
+  local_dir: creator/data/zapravosutu/results/
+  sound_name: original sound
+  sound_url: https://www.tiktok.com/music/original-sound-7223481514267282182
+  tags:
+  - zapravosutu
+  - mega
+  - drill
+  - balkan
+  - fyp
+  - bakaprase
+  - srbija
+  - hit
+  titles:
+  - Mega - Zapravo su tu
+  - Mega - Zapravo su tu
+  - Koliko jaka pesma, jedva cekam da izadje! Mega - Zapravo su tu
+  - Kidanje!!! Mega - Zapravo su tu
+  - Koliko vec cekam ovu pesmu niste svesni... Mega - Zapravo su tu
+  - Ne mogu da docekam da se ovo proslavi! Mega - Zapravo su tu
+  - Ovo ce biti pravi hit! Mega - Zapravo su tu
+  - Nova pesma, novi hit! Mega - Zapravo su tu
+
+zoziambijent:
+  name: zoziambijent
+  gdrive_dir: null
+  local_dir: creator/data/zoziambijent/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - zoziambijent
+  - zozi
+  - fyp
+  - trap
+  - bassivity
+  - srbija
+  - muzika
+  titles:
+  - Kako ovo ranije nisam cula? Zozi - Ambijent
+  - Drugarica kaze da joj je ovo omiljena pesma sta mislite? Zozi - Ambijent
+  - Zozi - Ambijent
+  - Zozi - Ambijent
+  - Slusajte ovo! Zozi - Ambijent
+  - Ne mogu da verujem koliko kida! Zozi - Ambijent
+  - Ko jos nije cuo ovu pesmu, obavezno poslusajte! Zozi - Ambijent
+
+pitbcndrill:
+  name: pitbcndrill
+  gdrive_dir: null
+  local_dir: creator/data/pitbcndrill/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - pitbcndrill
+  - crnicerak
+  - drill
+  - fyp
+  - pit
+  titles:
+  - Pit - BCN Drill
+  - Pit - BCN Drill
+  - Jos jedan drill artist se probija! Pit - BCN Drill
+  - Drill u Srbiji sve bolji... Pit - BCN Drill
+  - Ubio traku Pit - BCN Drill
+  - Buduci kralj srpskog drilla Pit - BCN Drill
+  - Srpska drill scena dobila novog talenta Pit - BCN Drill
+  - Brutalna lirika i tezak flow Pit - BCN Drill
+  - Surovi zvuk i stil Pit - BCN Drill
+
+shozeocinamene:
+  name: shozeocinamene
+  gdrive_dir: null
+  local_dir: creator/data/shozeocinamene/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - shozeocinamene
+  - fyp
+  - rouzi
+  - bassivity
+  - chill
+  - srbija
+  - muzika
+  - hit
+  titles:
+  - Shoze - Oci na mene
+  - Shoze - Oci na mene
+  - Odavno nisam cula nesto ovako dobro! Shoze - Oci na mene
+  - Kidanje...nemam sta da dodam Shoze - Oci na mene
+  - Shoze - Oci na mene
+  - Ova pesma mi ne izlazi iz glave! Shoze - Oci na mene
+  - Zaljubila sam se u ovaj hit Shoze - Oci na mene
+  - Nekako umirujuće, ali i zarazno Shoze - Oci na mene
+  - Svaki put kad slušam, sve mi se više sviđa Shoze - Oci na mene
+
+pcelaalukard:
+  name: pcelaalukard
+  gdrive_dir: null
+  sound_name: Alukard
+  sound_url: https://www.tiktok.com/music/Alukard-7226881293190432769
+  local_dir: creator/data/pcelaalukard/results/
+  tags:
+  - pcelaalukard
+  - pcela
+  - bassivity
+  - cc
+  - fyp
+  - srbija
+  - muzika
+  - rap
+  titles:
+  - Pcela - Alukard
+  - Pcela - Alukard
+  - Pcela opet ubija... Pcela - Alukard
+  - Kako ovo nisam cuo ranije??? Pcela - Alukard
+  - Ne mogu da verujem koliko je dobar! Pcela - Alukard
+  - Slusam ovo na repeat... Pcela - Alukard
+  - Ne znam sta bih rekla, samo slusam... Pcela - Alukard
+  - Vraća se na velika vrata! Pcela - Alukard
+
+bralegdesi:
+  name: bralegdesi
+  gdrive_dir: null
+  local_dir: creator/data/bralegdesi/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - bralegdesi
+  - brale
+  - trep
+  - srbija
+  - fyp
+  - bakaprase
+  - muzika
+  - balkan
+  titles:
+  - Brale x MCRAE - Gde si
+  - Brale x MCRAE - Gde si
+  - Koliko kida lik... Brale x MCRAE - Gde si
+  - Jedna od boljih pesama koje sam čula Brale x MCRAE - Gde si
+  - Brale x MCRAE - Gde si
+  - Ova pesma mi ne izlazi iz glave Brale x MCRAE - Gde si
+  - Pravi hit Brale x MCRAE - Gde si
+  - Kakav tandem Brale x MCRAE - Gde si
+
+kanemonaliza:
+  name: kanemonaliza
+  gdrive_dir: null
+  local_dir: creator/data/kanemonaliza/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - kanemonaliza
+  - kane
+  - fyp
+  - bakaprase
+  - bassivity
+  - srbija
+  - muzika
+  - hit
+  titles:
+  - Kane - Mona Liza
+  - Kane - Mona Liza
+  - Kane - Mona Liza
+  - Bolji od Voyage-a... Kane - Mona Liza
+  - Ubija ova pesma Kane - Mona Liza
+  - Ne mogu da prestanem da je slušam Kane - Mona Liza
+  - Zarazna pesma Kane - Mona Liza
