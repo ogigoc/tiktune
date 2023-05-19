@@ -1,11 +1,21 @@
 import glob
 import json
+import yaml
 
 RESULT_FILE = 'videos.json'
+CAMPAIGNS_FILE = '../campaigns.yaml'
 
 def main():
     files = sorted(list(glob.glob('data/*.json')), reverse=True)
     videos = dict()
+
+    print("Reading campaigns...")
+    with open(CAMPAIGNS_FILE, 'r') as file:
+        campaigns = yaml.safe_load(file)
+    campaign_tags = {
+    campaign['tags'][0]
+    for campaign in campaigns.values()
+    }
 
     for file in files:
         response = json.load(open(file, 'r'))
@@ -15,8 +25,12 @@ def main():
         # username check
         username = file.split(':')[-1][:-5]
         print(username, videos_resp[0]['author']['unique_id'])
-        if not (username == 'serbianhitsongs' and videos_resp[0]['author']['unique_id'] == 'julijagarasan'):
-            assert videos_resp[0]['author']['unique_id'] == username
+        if not (username == 'serbianhitsongs' and videos_resp[0]['author']['unique_id'] == 'julijagarasan') \
+            and not (username == 'bakapraseflexx' and videos_resp[0]['author']['unique_id'] == 'bakapraseflleex'):
+            if videos_resp[0]['author']['unique_id'] != username:
+                print(videos_resp[0]['author']['unique_id'])
+                print(username)
+                raise Exception(f"Username mismatch: {username} != {videos_resp[0]['author']['unique_id']}")
 
         for video_resp in videos_resp:
             video = dict()
@@ -33,7 +47,7 @@ def main():
             for k, v in video_resp['risk_infos'].items():
                 video['risk_' + k] = v
             video['hashtags'] = [h['hashtag_name'] for h in video_resp['text_extra'] if h['type'] == 1]
-            video['campaign'] = next((h for h in video['hashtags'] if h in {'10jeali2', 'pazljivo', 'yugofreestyle2', 'vasadance', 'sosic2', 'srceluduje', 'praksaprovozamo', 'ljubavnarepeat', 'belebembare', 'rajkerari', 'davidonazna', 'pcelacrackhouse', 'denjaplacikunivici', 'montanaklajklaj', 'minailegal', 'pptisita', 'levonnnemame', 'nijenijelako', 'zapravosutu', 'zoziambijent', 'pitbcndrill', 'shozeocinamene', 'pcelaalukard'}), None)
+            video['campaign'] = next((h for h in video['hashtags'] if h in campaign_tags), None)
 
             if video_id not in videos:
                 videos[video_id] = video
