@@ -3,8 +3,8 @@ pazljivo:
   gdrive_dir: 1fOjznRlLYGPKPjashVJ9p36LvDV3SvGp
   local_dir: drive_videos/TikTok/pazljivo/
   tags:
-  - vasa
   - pazljivo
+  - vasa
   - vasa_uno
   - fyp
   titles:
@@ -15,9 +15,9 @@ mina10:
   gdrive_dir: 1tt12PVSZFLoHuUtBxiC6QPm3919dDKVc
   local_dir: drive_videos/TikTok/mina10/
   tags:
+  - 10jeali2
   - minaheart
   - 10jeali
-  - 10jeali2
   - fyp
   titles:
   - '"10 je ali" pesma je napokon izasla'
@@ -27,8 +27,8 @@ yugofreestyle2:
   gdrive_dir: 1v2ygpUcAveJoA7wxfDdkKUJ01aDcv74q
   local_dir: drive_videos/TikTok/yugofreestyle2/
   tags:
-  - gabr1el_35
   - yugofreestyle2
+  - gabr1el_35
   - bakaprase
   - srbija
   - fyp
@@ -48,19 +48,19 @@ srceluduje:
   sound_name: Srce luduje
   sound_url: https://www.tiktok.com/music/Srce-luduje-7206151702318189317
   tags:
-  - kiki
   - srceluduje
+  - kiki
   - srbija
   - fyp
   titles:
-  - Moje srce opet luduje Kiki - Srce Luduje <3
+  - Moje srce opet luduje Kiki - Zove Srce Luduje <3
   - Kiki opet iskidao - Srce Luduje <3
-  - Poludela sam za ovom pesmom <3 Kiki - Srce Luduje
-  - Ne mogu da se suzdrzim uz ovo Kiki - Srce Luduje
-  - Ludim uz ovaj hit Kiki - Srce Luduje
-  - Kako ne bih ludela uz ovo? Kiki - Srce Luduje
-  - Ludim uz ovaj hit Kiki - Srce Luduje
-  - "Pesma koja me vra\u0107a u \u017Eivot! Kiki - Srce Luduje"
+  - Poludela sam za ovom pesmom <3 Kiki - Zove Srce Luduje
+  - Ne mogu da se suzdrzim uz ovo Kiki - Zove Srce Luduje
+  - Ludim uz ovaj hit Kiki - Zove Srce Luduje
+  - Kako ne bih ludela uz ovo? Kiki - Zove Srce Luduje
+  - Ludim uz ovaj hit Kiki - Zove Srce Luduje
+  - "Pesma koja me vra\u0107a u \u017Eivot! Kiki - Zove Srce Luduje"
 
 provozamo:
   name: provozamo
@@ -299,7 +299,7 @@ levonn:
 nijenijelako:
   name: nijenijelako
   gdrive_dir: null
-  local_dir: creator/data/nijenijelako/results/
+  local_dir: creator/data/nijenijelako/results.new/
   sound_name: null
   sound_url: null
   tags:
@@ -311,14 +311,14 @@ nijenijelako:
   - srbija
   - hit
   titles:
-  - Gaga - Nije nije lako @gagakorg1
-  - Gaga - Nije nije lako @gagakorg1
-  - Gaga - Nije nije lako @gagakorg1
-  - Kida pesma!! @gagakorg1 Gaga - Nije nije lako
-  - Poludela sam za ovim... @gagakorg1 Gaga - Nije nije lako
-  - Drugarica me je navukla na ovo @gagakorg1 Gaga - Nije nije lako
-  - Na repeatu mi je danima @gagakorg1 Gaga - Nije nije lako
-  - Ovo je prava stvar @gagakorg1 Gaga - Nije nije lako
+  - Gaga - Nije nije lako
+  - Gaga - Nije nije lako
+  - Gaga - Nije nije lako
+  - Kida pesma!! Gaga - Nije nije lako
+  - Poludela sam za ovim... Gaga - Nije nije lako
+  - Drugarica me je navukla na ovo Gaga - Nije nije lako
+  - Na repeatu mi je danima Gaga - Nije nije lako
+  - Ovo je prava stvar Gaga - Nije nije lako
 
 zapravosutu:
   name: zapravosutu
@@ -348,7 +348,7 @@ zapravosutu:
 zoziambijent:
   name: zoziambijent
   gdrive_dir: null
-  local_dir: creator/data/zoziambijent/results/
+  local_dir: creator/data/zoziambijent/results.overlay/
   sound_name: null
   sound_url: null
   tags:
@@ -367,6 +367,10 @@ zoziambijent:
   - Slusajte ovo! Zozi - Ambijent
   - Ne mogu da verujem koliko kida! Zozi - Ambijent
   - Ko jos nije cuo ovu pesmu, obavezno poslusajte! Zozi - Ambijent
+  overlay_text:
+  - Jel se i vi dozirate ovom pesmom svaki dan?
+  - Jel samo meni iskace ovo na fy?
+  - Kako vam zvuci??
 
 pitbcndrill:
   name: pitbcndrill
@@ -416,6 +420,23 @@ shozeocinamene:
   - Zaljubila sam se u ovaj hit Shoze - Oci na mene
   - Nekako umirujuće, ali i zarazno Shoze - Oci na mene
   - Svaki put kad slušam, sve mi se više sviđa Shoze - Oci na mene
+  overlay_text:
+  - Bas chill pesma, kako se vama svidja??
+  - Moja drugarica pusta ovo svaki dan?
+  - 0 - 10?
+  templates:
+  - path: data/shozeocinamene/templates/shoze template comx.mov
+    timings:
+    - 00:00:00:00000
+    - 00:00:00:27930
+    - 00:00:01:19110
+    - 00:00:02:42630
+    - 00:00:03:30870
+    - 00:00:06:01470
+    - 00:00:06:32340
+    - 00:00:09:01470
+    - 00:00:09:36750
+    - 00:00:10:36750
 
 pcelaalukard:
   name: pcelaalukard
@@ -467,26 +488,358 @@ bralegdesi:
   - Pravi hit Brale x MCRAE - Gde si
   - Kakav tandem Brale x MCRAE - Gde si
 
-kanemonaliza:
-  name: kanemonaliza
+# kanemonaliza:
+#   name: kanemonaliza
+#   gdrive_dir: null
+#   local_dir: creator/data/kanemonaliza/results/
+#   sound_name: null
+#   sound_url: null
+#   tags:
+#   - kanemonaliza
+#   - kane
+#   - fyp
+#   - bakaprase
+#   - bassivity
+#   - srbija
+#   - muzika
+#   - hit
+#   titles:
+#   - Kane - Mona Liza
+#   - Kane - Mona Liza
+#   - Kane - Mona Liza
+#   - Bolji od Voyage-a... Kane - Mona Liza
+#   - Ubija ova pesma Kane - Mona Liza
+#   - Ne mogu da prestanem da je slušam Kane - Mona Liza
+#   - Zarazna pesma Kane - Mona Liza
+
+snimaknasetajne:
+  name: snimaknasetajne
   gdrive_dir: null
-  local_dir: creator/data/kanemonaliza/results/
+  local_dir: creator/data/snimaknasetajne/results/
   sound_name: null
   sound_url: null
   tags:
-  - kanemonaliza
-  - kane
+  - snimaknasetajne
+  - neroproject
   - fyp
   - bakaprase
-  - bassivity
+  - idj
   - srbija
+  - muzika
+  - balkan
+  titles:
+  - Odavno nisam cula nesto ovako dobro... Nero Project - Snimak nase tajne
+  - Nero Project - Snimak nase tajne
+  - Nero Project - Snimak nase tajne
+  - Nero Project - Snimak nase tajne
+  - Jeste i vi poludeli za ovim??? Nero Project - Snimak nase tajne
+  - Prava stvar za ovu sezonu! Nero Project - Snimak nase tajne
+  - Zarazna pesma! Nero Project - Snimak nase tajne
+
+evanemirati:
+  name: evanemirati
+  gdrive_dir: null
+  local_dir: creator/data/evanemirati/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - evanemirati
+  - licanin
+  - fyp
+  - hit
+  - song
+  - srbija
+  - muzika
+  - trap
+  - balkan
+  titles:
+  - Nikad do sad nisam cuo nesto ovako dobro Evan - Emirati
+  - Evan - Emirati
+  - Evan - Emirati
+  - Evan - Emirati
+  - Opsednuta sam ovom pesmom Evan - Emirati
+  - Ova pesma mi ne izlazi iz glave Evan - Emirati
+  - Pravo osveženje na muzičkoj sceni Evan - Emirati
+  - Kako ovo nisam ranije čuo? Evan - Emirati
+  - Evan - Emirati, pravi hit na sceni!
+
+validno:
+  name: validno
+  gdrive_dir: null
+  local_dir: creator/data/validno/results/
+  sound_name: Validno
+  sound_url: https://www.tiktok.com/music/Validno-7227230803599443969
+  tags:
+  - validno
+  - badric
+  - fyp
+  - hit
+  - beograd
+  - bakaprase
+  - srpskamuzika
+  - novihit
+  - trep
+  titles:
+  - Badric - Validno
+  - Djordje - Validno
+  - Odlicna pesma! Badric - Validno
+  - Skoro nisam cula nesto ovako Djordje - Validno
+  - Nova stvar kida! Djordje - Validno
+  - Ne mogu da prestanem da slušam! Djordje - Validno
+  - Pravi hit na sceni! Badric - Validno
+  - Zarazna pesma! Djordje - Validno
+  - Pogodak! Badric - Validno
+
+vasaklinka:
+  name: vasaklinka
+  gdrive_dir: null
+  local_dir: creator/data/vasaklinka/results.scenes/
+  sound_name: Vasa_Klinka
+  sound_url: https://www.tiktok.com/music/VasaKlinka-7232356009971682053
+  tags:
+  - vasaklinka
+  - vasa
+  - fyp
+  - thcf
+  - pazljivo
+  - bakaprase
+  - scenes
+  titles:
+  - Stara pesma al kida Vasa - Klinka
+  - Vasa - Klinka
+  - Vasa - Klinka
+  - Vasa - Klinka
+  - Vasa opet iskidao Vasa - Klinka
+  - Jos jedan hit od Vase u najavi Vasa - Klinka
+  - Ovo ne moze da se preskoci Vasa - Klinka
+  - Pesma koja ne izlazi iz glave Vasa - Klinka
+  - Ovo mi je na repeatu danima Vasa - Klinka
+  - Nova stara pesma, ali kida Vasa - Klinka
+  - Vasa se vraca na velika vrata Vasa - Klinka
+  overlay_text:
+  - Moja drugarica napinje svaki dan ovu pesmu... kako vam zvuci?
+  - Iskocilo mi je 17 puta na fy page i sad ne mogu da prestanem da slusam <3
+  - Vasa opet dere sa ovim pesmama
+  templates:
+  - path: data/vasaklinka/templates/vasaklinka3.mov
+    timings:
+    - 00:00:00:00000
+    - 00:00:00:54022
+    - 00:00:01:01040
+    - 00:00:02:46102
+    - 00:00:02:91120
+    - 00:00:04:35181
+    - 00:00:04:82201
+    - 00:00:06:25260
+    - 00:00:06:72281
+    - 00:00:07:93000
+    - 00:00:08:93000
+    # svi
+    # timings:
+    # - 00:00:00:00000
+    # - 00:00:00:08002
+    # - 00:00:00:54022
+    # - 00:00:01:01040
+    # - 00:00:01:49061
+    # - 00:00:01:96081
+    # - 00:00:02:46102
+    # - 00:00:02:91120
+    # - 00:00:03:39140
+    # - 00:00:03:87160
+    # - 00:00:04:35181
+    # - 00:00:04:82201
+    # - 00:00:05:29222
+    # - 00:00:05:77240
+    # - 00:00:06:25260
+    # - 00:00:06:72281
+    # - 00:00:07:20301
+    # - 00:00:07:67321
+    # - 00:00:07:93000
+    # - 00:00:08:93000
+    # timings:
+    # - 00:00:00:00000
+    # - 00:00:00:23520
+    # - 00:00:01:01470
+    # - 00:00:01:22050
+    # - 00:00:02:14700
+    # - 00:00:02:35280
+    # - 00:00:03:14700
+    # - 00:00:04:13230
+    # - 00:00:04:33810
+    # - 00:00:05:08820
+    # - 00:00:06:07350
+    # - 00:00:06:26460
+    # - 00:00:07:01470
+    # - 00:00:07:41160
+    # - 00:00:07:93000
+    # - 00:00:08:93000
+
+idikodnje:
+  name: idikodnje
+  gdrive_dir: null
+  local_dir: creator/data/idikodnje/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - idikodnje
+  - naddy_baby
+  - fyp
+  - house
+  - srbija
+  - idj
+  - bassivity
+  - muzika
+  - balkan
+  - novisad
+  titles:
+  - Nadyy baby - Idi kod nje
+  - Nadyy baby - Idi kod nje
+  - Nadyy baby - Idi kod nje
+  - Opasna pesma! Nadyy baby - Idi kod nje
+  - Kidanje!  Nadyy baby - Idi kod nje
+  - Pogodak za svaki party! Nadyy baby - Idi kod nje
+  - Pesma koja osvaja! Nadyy baby - Idi kod nje
+  - Ne mogu da prestanem da slušam! Nadyy baby - Idi kod nje
+  - Ova pesma je zarazna! Nadyy baby - Idi kod nje
+  - Nova pesma, novi hit! Nadyy baby - Idi kod nje
+
+milanokiki:
+  name: milanokiki
+  gdrive_dir: null
+  local_dir: creator/data/milanokiki/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - milanokiki
+  - kiki
+  - fyp
+  - song
+  - serbia
+  - bakaprase
+  - drill
+  - bassivity
+  - muzika
+  - hit
+  - balkan
+  titles:
+  - Kiki se opet pokazao! Kiki - Zove Milano
+  - Kiki - Zove Milano
+  - Kiki - Zove Milano
+  - Kiki - Zove Milano
+  - Gori pesma!! Kiki - Zove Milano
+  - Ova pesma mi je totalno promenila dan! Kiki - Zove Milano
+  - Ne mogu da verujem koliko je dobro! Kiki - Zove Milano
+  - Ovo morate čuti... Kiki - Zove Milano
+  - Kako nisam ranije čula ovo?? Kiki - Zove Milano
+  - Na repeatu mi je! Kiki - Zove Milano
+
+karminnakozi:
+  name: karminnakozi
+  gdrive_dir: null
+  local_dir: creator/data/karminnakozi/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - karminnakozi
+  - fyp
+  - viral
+  - balkan
+  - music
+  - srbija
+  - hit
+  - trep
+  - zezanje
+  titles:
+  - Coaprovinciale x Tom - Karmin Na Kozi
+  - Coaprovinciale x Tom - Karmin Na Kozi
+  - Coaprovinciale x Tom - Karmin Na Kozi
+  - Kida pesma! Coaprovinciale x Tom - Karmin Na Kozi
+  - Kako su ovo odradili ovako dobro... Coaprovinciale x Tom - Karmin Na Kozi
+  - Jel i vama uslo u glavu ovo?? Coaprovinciale x Tom - Karmin Na Kozi
+  - Zarazna pesma brate, ne mogu da se skinem s nje... Coaprovinciale x Tom - Karmin Na Kozi
+  - Mislite da je ovo novi hit? Coaprovinciale x Tom - Karmin Na Kozi
+  - Ne mogu da verujem da ovu stvar još niste čuli! Coaprovinciale x Tom - Karmin Na Kozi
+  - Ova stvar je bomba, non-stop je pevam! Coaprovinciale x Tom - Karmin Na Kozi
+  - Slušaj ovo, obavezno! Coaprovinciale x Tom - Karmin Na Kozi
+
+monalisakristianflorea:
+  name: monalisakristianflorea
+  gdrive_dir: null
+  local_dir: creator/data/monalisakristianflorea/results/
+  sound_name: original sound
+  sound_url: https://www.tiktok.com/music/original-sound-7236777863305775899
+  tags:
+  - monalisakristianflorea
+  - kristianflorea
+  - fyp
+  - viral
+  - balkan
+  - srbija
+  - muzika
+  titles:
+  - Kristian se vraca opet! Mona Lisa
+  - Lik je sve bolji i bolji jedva cekam da cujem ovo u klubu - Mona Lisa
+  - Kidanje!!! Mona Lisa 
+  - Ne mogu da verujem, ova pesma je 🔥! Mona Lisa
+  - Savrsenstvo! Zaljubljena sam u ovu pesmu... Mona Lisa
+  - Ova pesma mi je totalno razbila foru! Mona Lisa
+  - Na repeatu mi je danima! Mona Lisa
+
+balerinarmx:
+  name: balerinarmx
+  gdrive_dir: null
+  local_dir: creator/data/balerinarmx/results/
+  sound_name: Vasa_X_BALERINA_RMX
+  sound_url: https://www.tiktok.com/music/VasaXBALERINARMX-7235920978735958789
+  tags:
+  - voyage
+  - teatairovic
+  - balerina
+  - balerinarmx
+  - vasa_uno
+  - drill
+  - srbija
+  - fyp
+  - bakaprase
   - muzika
   - hit
   titles:
-  - Kane - Mona Liza
-  - Kane - Mona Liza
-  - Kane - Mona Liza
-  - Bolji od Voyage-a... Kane - Mona Liza
-  - Ubija ova pesma Kane - Mona Liza
-  - Ne mogu da prestanem da je slušam Kane - Mona Liza
-  - Zarazna pesma Kane - Mona Liza
+  - Jel bolji original ili remix? VASA X BALERINA RMX
+  - VASA X BALERINA RMX
+  - Ljudi sta je ovo, najjaci remix ikad!!!!
+  - Nekada je balerina, ali sad je RMX!!! VASA X BALERINA RMX
+  - Prešla sam na remix stranu! VASA X BALERINA RMX
+  - Zarazno, pravo remek delo! VASA X BALERINA RMX
+  - Original? No, thanks. Remix all the way! VASA X BALERINA RMX
+  - Ništa bolje od dobrog remixa! VASA X BALERINA RMX
+
+cigagromm:
+  name: cigagromm
+  gdrive_dir: null
+  local_dir: creator/data/cigagromm/results/
+  sound_name: null
+  sound_url: null
+  tags:
+  - cigagromm
+  - fyp
+  - viral
+  - balkan
+  - muzika
+  - srbija
+  - zvezdegranda
+  - kafanskihit
+  - tapetaboli
+  titles:
+  - Sasa Mitrovic Ciga - Tapija na bol
+  - Sasa Mitrovic Ciga - Tapija na bol
+  - Ciga - Tapija na bol
+  - Ciga - Tapija na bol
+  - Al kida ova pesma! Sasa Mitrovic Ciga - Tapija na bol
+  - Ja na svadbi slusam samo ovo Sasa Mitrovic Ciga - Tapija na bol
+  - Legla da spavam, a u glavi mi ova stvar! Sasa Mitrovic Ciga - Tapija na bol
+  - Brate, zivotna pesma! Sasa Mitrovic Ciga - Tapija na bol
+  - Ova pesma je banger! Sasa Mitrovic Ciga - Tapija na bol
+  - Ne znam za vas, ali ja sam totalno opsednuta ovom pesmom! Sasa Mitrovic Ciga - Tapija na bol
+  - Jel' ova pesma uopste moze biti bolja? Sasa Mitrovic Ciga - Tapija na bol
+  - Ova pesma me bas pukla pravo u srce... Sasa Mitrovic Ciga - Tapija na bol
+  - On repeat celu noc... Sasa Mitrovic Ciga - Tapija na bol
