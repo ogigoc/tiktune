@@ -3,7 +3,7 @@ import string
 import random
 import logging
 
-from uploader import android2 as android
+from uploader import android
 from uploader import utils
 import password_creator
 

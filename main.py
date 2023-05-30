@@ -11,7 +11,7 @@ import pandas as pd
 import drive
 import tiktok_uploader
 import telegram
-from uploader import android2 as android
+from uploader import android
 from uploader import utils
 
 import logging

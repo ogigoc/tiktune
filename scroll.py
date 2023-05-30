@@ -7,7 +7,7 @@ import time
 import pandas as pd
 
 import telegram
-from uploader import android2 as android
+from uploader import android
 from uploader import utils
 
 log = logging.getLogger(__name__)
