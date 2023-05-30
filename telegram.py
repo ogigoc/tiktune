@@ -5,7 +5,7 @@ TELEGRAM_BOT_URL = 'https://api.telegram.org/bot6040627117:AAEFVO_1WkBFBIF9cwAjr
 def send_message(message):
     r = requests.post(
         url=TELEGRAM_BOT_URL,
-        data={'chat_id': 5080692312, 'text': message}
+        data={'chat_id': -801140093, 'text': message}
     )
 
 if __name__ == '__main__':

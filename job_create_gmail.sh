@@ -3,4 +3,4 @@
 
 cd /home/ognjen/Projects/tiktok-promo
 source env/bin/activate
-python main2.py -d $1 2>&1 | tee -a logs.txt
+python create_gmail.py -d $1 2>&1 | tee -a logs.txt

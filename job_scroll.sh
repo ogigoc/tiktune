@@ -3,4 +3,4 @@
 
 cd /home/ognjen/Projects/tiktok-promo
 source env/bin/activate
-python main2.py -d $1 2>&1 | tee -a logs.txt
+python scroll.py -d $1 2>&1 -a all -m 30 | tee -a logs.txt

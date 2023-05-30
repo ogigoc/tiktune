@@ -3,10 +3,9 @@ from __future__ import print_function
 import io
 import glob
 
-import google.auth
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
-from googleapiclient.http import MediaIoBaseDownload
+from googleapiclient.http import MediaIoBaseDownload, MediaFileUpload
 from google.oauth2 import service_account
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -87,8 +86,46 @@ def sync(local_dir, gdrive_dir):
             print(f"Downloading {file['name']}")
             output.write(download_file(file['id']))
 
+
+def upload_to_dir(gdrive_dir_name, video_path, video_name):
+    """Uploads a video file to a directory in Google Drive
+    Args:
+        gdrive_dir_name: Name of the directory to upload the file to
+        video_path: Path to the video file to upload
+        video_name: Name of the video file once uploaded
+    """
+    # Query to get the folder id from the folder name
+    response = service.files().list(
+        q=f"name='{gdrive_dir_name}' and mimeType='application/vnd.google-apps.folder' and '1-W30kZ2CD99B28PNjY3_u3CCKQXl1ql7' in parents",
+        spaces='drive',
+        fields='files(id)').execute()
+    print(response)
+    print(response.get('files', []))
+    gdrive_dir_id = response.get('files', [])[0].get('id')
+
+    file_metadata = {
+        'name': video_name,
+        'parents': [gdrive_dir_id]
+    }
+    media = MediaFileUpload(video_path, 
+                            mimetype='video/mp4',
+                            resumable=True)
+    request = service.files().create(body=file_metadata,
+                                     media_body=media,
+                                     fields='id')
+    response = None
+    while response is None:
+        status, response = request.next_chunk()
+        if status:
+            print("Uploaded {0}".format(int(status.progress() * 100)))
+    
+    print("Upload Complete.")
+    return response.get('id')
+
+    
 if __name__ == '__main__':
-    sync()
+    upload_to_dir('test', 'tmp/videos/a91.mp4', 'test #test @vasa_uno .mp4')
+    # sync()
 
     # file = download_file(real_file_id='1OePlCw-xFIEHPP3CLq0jknNzTYLp1UGe')
     # print(file)

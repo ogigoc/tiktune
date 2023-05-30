@@ -1,0 +1,102 @@
+01 10 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7
+31 10 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_2
+
+31 11 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7_2
+
+01 11 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_1
+31 11 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_3
+01 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh desk
+11 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh repurpose
+31 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_4
+01 13 * * * /home/ognjen/Projects/tiktok-promo/job2.sh redminote
+31 13 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_5
+01 14 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_2
+31 14 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7ana_6
+01 15 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_3
+31 15 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_4
+41 15 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_6
+
+21 15 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7_5
+
+
+31 16 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7pro_10
+01 17 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7old_11
+
+31 17 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7pro_10
+
+01 18 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7
+31 18 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_2
+
+31 19 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7_2
+
+01 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_1
+31 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_3
+01 20 * * * /home/ognjen/Projects/tiktok-promo/job2.sh desk
+01 20 * * * /home/ognjen/Projects/tiktok-promo/job2.sh repurpose
+31 20 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_4
+01 21 * * * /home/ognjen/Projects/tiktok-promo/job2.sh redminote
+31 21 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_5
+01 22 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_2
+
+21 22 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7_5
+
+31 22 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7ana_6
+
+01 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_3
+31 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_4
+41 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_6
+
+01 23 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_3
+31 23 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_4
+41 23 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22_6
+
+31 00 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7pro_10
+01 01 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7old_11
+
+
+01 02 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7
+11 02 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7_2
+21 02 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_1
+31 02 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7_3
+01 03 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7_4
+11 03 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh redminote
+21 03 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7_5
+31 03 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_2
+41 03 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7ana_6
+51 03 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_3
+01 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_4
+11 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7pro_10
+21 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7old_11
+
+
+# Vasa
+11 11 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7pro_7
+11 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_8
+11 13 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7vasa_8
+
+11 17 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7pro_7
+11 18 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7_8
+11 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh j7vasa_8
+
+11 21 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7pro_7
+11 22 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7_8
+11 23 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7vasa_8
+
+# Djoka
+11 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_8
+21 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_9
+31 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_10
+41 12 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_11
+
+11 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_8
+21 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_9
+31 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_10
+41 19 * * * /home/ognjen/Projects/tiktok-promo/job2.sh k22djoka_11
+
+11 21 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22djoka_8
+21 21 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22djoka_9
+31 21 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22djoka_10
+41 21 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22djoka_11
+
+31 22 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22djoka_10
+41 22 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22djoka_11

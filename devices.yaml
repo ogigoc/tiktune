@@ -1,123 +1,254 @@
 desk:
   name: desk
   videos_per_campaign:
-    nijenijelako: 5
-    pcelaalukard: 2
-    zoziambijent: 3
-    pitbcndrill: 3
-    shozeocinamene: 3
+    pcelaalukard: 1
+
+repurpose:
+  name: repurpose
+  videos_per_campaign:
+    milanokiki: 1
+    idikodnje: 1
+    cigagromm: 1
 
 redminote:
   name: redminote
   device_id: 3646ec0f
+  model: RedmiNote8T
   videos_per_campaign:
-    pcelaalukard: 1
-    zoziambijent: 2
-    pitbcndrill: 2
-    nijenijelako: 2
+    karminnakozi: 1
+    bralegdesi: 1
+    idikodnje: 1
+    validno: 1
     shozeocinamene: 1
+    snimaknasetajne: 1
+    evanemirati: 1
+    milanokiki: 1
 
 j7:
   name: j7
   device_id: 100.99.18.17
+  model: SM-J710FN
   videos_per_campaign:
-    pcelaalukard: 1
-    zoziambijent: 1
-    pitbcndrill: 1
-    nijenijelako: 2
+    milanokiki: 1
+    cigagromm: 1
+    monalisakristianflorea: 1
+    snimaknasetajne: 1
     shozeocinamene: 1
     
 j7_2:
   name: j7_2
   device_id: 100.77.209.31
+  model: SM-J710FN
   videos_per_campaign:
-    zoziambijent: 1
-    nijenijelako: 2
-    pcelaalukard: 1
+    evanemirati: 1
+    milanokiki: 1
+    bralegdesi: 1
+    karminnakozi: 1
     shozeocinamene: 1
     
 j7_3:
   name: j7_3
-  device_id: 100.106.187.72
+  device_id: 52038effec9da3db
+  # device_id: 100.106.187.72
+  model: SM-J710FN
   videos_per_campaign:
-    nijenijelako: 2
-    pitbcndrill: 1
-    zoziambijent: 1
+    bralegdesi: 1
+    validno: 1
+    milanokiki: 1
+    idikodnje: 1
     shozeocinamene: 1
 
 j7_4:
   name: j7_4
   device_id: 100.76.20.44
+  model: SM-J710FN
   videos_per_campaign:
-    pcelaalukard: 1
-    nijenijelako: 1
-    pitbcndrill: 1
+    bralegdesi: 1
+    monalisakristianflorea: 1
+    evanemirati: 1
+    snimaknasetajne: 1
+    validno: 1
     
 j7_5:
   name: j7_5
   device_id: 100.98.41.75
+  model: SM-J710FN
   videos_per_campaign:
-    nijenijelako: 1
-    pitbcndrill: 1
+    idikodnje: 1
+    shozeocinamene: 1
 
 j7ana_6:
   name: j7ana_6
   device_id: 100.79.143.93
+  model: SM-J730F
   videos_per_campaign:
-    pitbcndrill: 1
-    pcelaalukard: 1
-    nijenijelako: 1
-    zoziambijent: 1
+    validno: 1
+    bralegdesi: 1
+    shozeocinamene: 1
+    snimaknasetajne: 1
 
 j7pro_7:
   name: j7pro_7
   device_id: 100.122.123.28
+  anydesk_id: 897069264
+  model: SM-J730G/DS
   videos_per_campaign:
-    nijenijelako: 1
+    balerinarmx: 8
+
+j7_8:
+  name: j7_8
+  device_id: 100.104.44.42
+  anydesk_id: 876197025
+  model: SM-J710FN
+  videos_per_campaign:
+    balerinarmx: 8
 
 j7vasa_8:
   name: j7vasa_8
+  anydesk_id: 522371119
   device_id: 100.105.200.128
+  model: SM-J710FN
+  videos_per_campaign:
+    balerinarmx: 8
 
 j7old_9:
   name: j7old_9
-  device_id: 100.125.251.115
+  device_id: 330085995082b375
+  # device_id: 100.125.251.115
   anydesk_id: 624035055
   phone_number: 0677318661
-  videos_per_campaign:
-  videos_per_campaign:
-    nijenijelako: 1
-    pitbcndrill: 1
+  model: SM-J700H
 
 k22_1:
   name: k22_1
   device_id: c05dca68
+  model: LM-K200EMW
+  phone_number: 0677469574
   videos_per_campaign:
-    pcelaalukard: 1
-    zoziambijent: 1
+    milanokiki: 1
+    shozeocinamene: 1
+    validno: 1
+    evanemirati: 1
+    monalisakristianflorea: 1
+    karminnakozi: 1
 
 k22_2:
   name: k22_2
-  device_id: 100.127.28.71
+  device_id: 44689aef
+  # device_id: 100.127.28.71
+  anydesk_id: 638407644
+  model: LM-K200EMW
+  phone_number: 0677341550
   videos_per_campaign:
-    pcelaalukard: 1
+    bralegdesi: 1
+    shozeocinamene: 1
+    validno: 1
+    milanokiki: 1
 
 j7pro_10:
   name: j7pro_10
-  device_id: 100.81.21.4
+  device_id: 52001745b43825f1
+  # device_id: 100.81.21.4
   anydesk_id: 248910818
+  model: SM-J730F
   videos_per_campaign:
-    pcelaalukard: 1
+    cigagromm: 1
+    idikodnje: 1
+    shozeocinamene: 1
 
-j7_11:
-  name: j7_11
+j7old_11:
+  name: j7old_11
   device_id: 3300ca65558da24b
   # device_id: 100.89.94.57
   phone_number: 0677362918
   anydesk_id: 814363188
+  model: SM-J700H
   videos_per_campaign:
-    pcelaalukard: 1
+    bralegdesi: 1
 
-lenovo1:
-  name: lenovo1
-  device_id: 5451e23e
+# lenovo1:
+#   name: lenovo1
+#   device_id: 5451e23e
+
+k22_3:
+  name: k22_3
+  device_id: ba4c0640
+  anydesk_id: 1356010443
+  model: LM-K200EMW
+  phone_number: 0677321916
+  videos_per_campaign:
+    idikodnje: 1
+    snimaknasetajne: 1
+    shozeocinamene: 1
+
+k22_4:
+  name: k22_4
+  device_id: cd48d4bd
+  anydesk_id: 1173051078
+  phone_number: 0677395260
+  model: LM-K200EMW
+  videos_per_campaign:
+    validno: 1
+    idikodnje: 1
+    milanokiki: 1
+
+k22_5:
+  name: k22_5
+  device_id: c102d43c
+  phone_number: 0677394879
+
+k22_6:
+  name: k22_6
+  device_id: 2ff09ae0
+  phone_number: 0677335279
+  model: LM-K200EMW
+  videos_per_campaign:
+    # zoziambijent: 1
+    monalisakristianflorea: 1
+  
+k22_7:
+  name: k22_7
+  device_id: bc91d4a5
+  phone_number: 0677320171
+  model: LM-K200EMW
+
+k22djoka_8:
+  name: k22djoka_8
+  anydesk_id: 1507630193
+  device_id: 100.119.232.107
+  model: LM-K200EMW
+  videos_per_campaign:
+    karminnakozi: 1
+    bralegdesi: 1
+    snimaknasetajne: 1
+
+k22djoka_9:
+  name: k22djoka_9
+  device_id: 100.79.231.113
+  phone_number: 0677469453
+  anydesk_id: 1426204864
+  model: LM-K200EMW
+  videos_per_campaign:
+    monalisakristianflorea: 1
+    idikodnje: 1
+
+k22djoka_10:
+  name: k22djoka_10
+  device_id: 100.67.235.15
+  phone_number: 0677311251
+  anydesk_id: 1588157482
+  model: LM-K200EMW
+  videos_per_campaign:
+    snimaknasetajne: 1
+    validno: 1
+
+k22djoka_11:
+  name: k22djoka_11
+  device_id: 100.66.55.43
+  phone_number: 0677393161
+  anydesk_id: 1426204864
+  model: LM-K200EMW
+  videos_per_campaign:
+    milanokiki: 1
+    shozeocinamene: 1
+  
