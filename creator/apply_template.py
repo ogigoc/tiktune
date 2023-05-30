@@ -1,8 +1,12 @@
+import re
+import subprocess
+import yaml
 import os
 import glob
 import random
 import multiprocessing as mp
 
+from scenedetect import detect, ContentDetector
 from moviepy.editor import *
 from moviepy import *
 from moviepy.video.fx.all import *
@@ -49,15 +53,23 @@ DATA_DIR = 'data'
 
 
 class Segment():
-    def __init__(self, start, template, background, effect, effect_name, output_dir):
+    def __init__(self, start, template, background, effect, effect_name, output_dir, background_filename=None, start_name=None):
         self.start = start
+        if start_name:
+            self.start_name = start_name
+        else:
+            self.start_name = self.start
         self.template = template
         self.background = background
+        if not background_filename:
+            self.background_filename = background.filename
+        else:
+            self.background_filename = background_filename
         self.effect = effect
         self.effect_name = effect_name
         self.output_dir = output_dir
         self.output_path = (
-            f'{output_dir}/{str(round(self.start)).zfill(5)};{self.background.filename.split("/")[-1].replace("/", "").replace(";", "")};{self.template.filename.split("/")[-1]};'
+            f'{output_dir}/{str(round(self.start_name)).zfill(5)};{self.background_filename.split("/")[-1].replace("/", "").replace(";", "")};{self.template.filename.split("/")[-1]};'
             f'{self.effect_name}.mp4'
         )
     
@@ -65,28 +77,43 @@ class Segment():
         if not os.path.isdir(self.output_dir):
             os.makedirs(self.output_dir)
 
+        if os.path.exists(self.output_path):
+            print(f"Skipping {self.output_path}")
+            return
+
         print(f"Rendering {self.output_path}")
         result = CompositeVideoClip([
             self.effect(self.background.subclip(self.start, self.start + self.template.duration).without_audio()),
             self.template
         ], size=self.template.size)
-        result.write_videofile(self.output_path)
+
+        try:
+            result.write_videofile(self.output_path, threads=6)
+        except IndexError:
+            # Short by one frame, so get rid on the last frame:
+            result = result.subclip(t_end=(result.duration - 1.0/result.fps))
+            result.write_videofile(self.output_path)
+            result.write_videofile(self.output_path, threads=6)
+        except Exception as e:
+            raise e
 
 
-def create_segments(campaign_name, step, bstart=3, bend=3):
+def create_segments(campaign_name, step, bstart=3, bend=3, template="", background="", output_dir="results"):
     print(f"Loading templates for campaign {campaign_name}")
+    template_paths = [template] if template else sorted(list(glob.glob(f'{DATA_DIR}/{campaign_name}/templates/*')))
     templates = [
         VideoFileClip(path, has_mask=True)
-        for path in sorted(list(glob.glob(f'{DATA_DIR}/{campaign_name}/templates/*')))
+        for path in template_paths
     ]
     print(f"Found {len(templates)} templates for {campaign_name}")
     if not templates:
         raise Exception(f"No templates for {campaign_name}")
 
     print(f"Loading backgrounds for campaign {campaign_name}")
+    background_paths = [background] if background else sorted(list(glob.glob(f'{DATA_DIR}/{campaign_name}/music_videos/*'))) 
     backgrounds = [
         VideoFileClip(path)
-        for path in sorted(list(glob.glob(f'{DATA_DIR}/{campaign_name}/music_videos/*')))
+        for path in background_paths
     ]
     print(f"Found {len(backgrounds)} backgrounds for {campaign_name}")
     if not backgrounds:
@@ -105,12 +132,112 @@ def create_segments(campaign_name, step, bstart=3, bend=3):
                 background=background,
                 effect=effects[i % len(effects)][1],
                 effect_name=effects[i % len(effects)][0],
-                output_dir=f'{DATA_DIR}/{campaign_name}/results',
+                output_dir=f'{DATA_DIR}/{campaign_name}/{output_dir}',
             ))
             i += 1
             start += step
     
     return segments
+
+
+
+def create_segments_scenes(campaign_name, template, background, cut_timings, n, output_dir="results.scenes"):
+    if not os.path.isdir(f'{DATA_DIR}/{campaign_name}/{output_dir}'):
+        os.makedirs(f'{DATA_DIR}/{campaign_name}/{output_dir}')
+    existing_clips = os.listdir(f'{DATA_DIR}/{campaign_name}/{output_dir}')
+    results = 0
+    if existing_clips:
+        results = max([int(re.search(r'(\d{5});', clip).group(1)) for clip in existing_clips])
+
+    print(f"Loading background and breaking into scenes")
+    scenes = detect(background, ContentDetector())
+    print(f"Found {len(scenes)} scenes")
+
+    print(f"Remobing short scenese")
+    max_timing = max([end - start for start, end in zip(cut_timings, cut_timings[1:])])
+    print(f"Max timing: {max_timing}")
+    print(f"Scene 1 length: {scenes[0][1].get_seconds() - scenes[0][0].get_seconds()}")
+    scenes = [
+        scene
+        for scene in scenes
+        if scene[1].get_seconds() - scene[0].get_seconds() > max_timing
+    ]
+    print(f"{len(scenes)} scenes left")
+
+    if len(scenes) < len(cut_timings) - 1:
+        raise Exception(f"Not enough scenes for {len(cut_timings)} cuts")
+
+    scene_idxs = list(range(len(scenes)))
+    
+    permutations = set()
+    template = VideoFileClip(template, has_mask=True)
+
+    while results < n:
+        random.shuffle(scene_idxs)
+        random_perm = tuple(scene_idxs)
+        if random_perm in permutations:
+            print("Used permutation, skipping")
+            continue
+
+        permutations.add(random_perm)
+        # check if permutation is valid
+        if any(
+            not (end - start < scenes[random_perm[i]][1].get_seconds() - scenes[random_perm[i]][0].get_seconds())
+            for i, (start, end) in enumerate(zip(cut_timings, cut_timings[1:]))
+        ):
+            print("Invalid permutation, skipping")
+            continue
+        
+        # create segment
+        # background_video = VideoFileClip(background)
+        # scene_segments = [
+        #     background_video.subclip(scenes[random_perm[i]][0].get_seconds(), scenes[random_perm[i]][0].get_seconds() + (cut_timings[i + 1] - cut_timings[i]))
+        #     for i in range(len(cut_timings) - 1)
+        # ]
+
+        filtergraph = ';'.join(
+            [f"[0:v]trim=start={scenes[random_perm[i]][0].get_seconds()}:end={scenes[random_perm[i]][0].get_seconds() + (cut_timings[i + 1] - cut_timings[i])},setpts=PTS-STARTPTS[v{i}];"
+            f"[0:a]atrim=start={scenes[random_perm[i]][0].get_seconds()}:end={scenes[random_perm[i]][0].get_seconds() + (cut_timings[i + 1] - cut_timings[i])},asetpts=PTS-STARTPTS[a{i}]" for i in range(len(cut_timings) - 1)]
+        ) + ';' + ''.join([f"[v{i}][a{i}]" for i in range(len(cut_timings) - 1)]) + f"concat=n={len(cut_timings) - 1}:v=1:a=1[outv][outa]"
+
+        # Run FFmpeg command with the built filtergraph
+        subprocess.call(['ffmpeg', '-i', background, '-filter_complex', filtergraph, '-map', '[outv]', '-map', '[outa]', 'template_cuts_tmp.mp4', '-y'])
+        import time
+        time.sleep(1)
+
+        # concatenate
+        result = VideoFileClip('template_cuts_tmp.mp4')
+        print("Concatenated durations")
+        print(result.duration)
+        print(template.duration)
+
+        # result.write_videofile('test.mp4')
+        # quit()
+
+        segment = Segment(
+            start=0,
+            template=template,
+            background=result,
+            effect=EFFECTS["full_zoom"],
+            effect_name="full_zoom",
+            output_dir=f'{DATA_DIR}/{campaign_name}/{output_dir}',
+            background_filename=background.split('/')[-1].split('.')[0],
+            start_name=results,
+        )
+        
+        # os.remove('template_cuts_tmp.mp4')
+
+        segment.write()
+        results += 1
+        print(f"Created {results} segments")
+
+        
+                
+
+
+
+    
+
     
 
 
@@ -177,10 +304,38 @@ def create_segments(campaign_name, step, bstart=3, bend=3):
 #         segment.write()
 #     print(f"Ending process {i}...")
 
+def time_to_seconds(time_str):
+    parts = time_str.split(':')
 
-def process_campaign(campaign_name, step):
+    hours = int(parts[0])
+    minutes = int(parts[1])
+    seconds = int(parts[2])
+    milliseconds = float(f'0.{parts[3]}')
+
+    total_seconds = (hours * 3600) + (minutes * 60) + seconds + milliseconds
+    return total_seconds
+
+def process_campaign(campaign_name, step, template="", background="", output_dir="results", function="simple", n=100):
     print(f"Processing campaign {campaign_name}")
-    segments = create_segments(campaign_name, step=step)
+    if function == "simple":
+        segments = create_segments(campaign_name, step=step, template=template, background=background, output_dir=output_dir)
+    elif function == "scenes":
+        # read campaign cut timings
+        with open('../campaigns.yaml', 'r') as file:
+            campaign = yaml.safe_load(file)[campaign_name]
+            try:
+                template_dict = next(t for t in campaign['templates'] if t['path'] == template)
+            except StopIteration:
+                raise Exception(f"Template {template} not found in campaign {campaign_name}")
+            timings = [
+                time_to_seconds(time)
+                for time in template_dict['timings']
+            ]
+            print(f"Cut timings: {timings}")
+
+        segments = create_segments_scenes(campaign_name, template=template, background=background, output_dir=output_dir, cut_timings=timings, n=n)
+    else:
+        raise Exception(f"Unknown function {function}")
     print(f"Creating {len(segments)} clips")
     random.seed(101010102)
     random.shuffle(segments)
@@ -201,15 +356,19 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--campaign", help="Name of the campaign", required=True)
     parser.add_argument("-s", "--step", help="How many seconds between start of each video", default=2, type=float)
+    parser.add_argument("-t", "--template", help="Template video path", default="")
+    parser.add_argument("-b", "--background", help="Background video path", default="")
+    parser.add_argument("-o", "--output", help="Output directory name", default="results")
+    parser.add_argument("-f", "--function", help="Fucntion to apply to create segments", default="simple")
+    parser.add_argument("-n", "--number", help="Number of videos to create", default=100, type=int)
 
-    # parser.add_argument("-m", "--music_video", help="Music video path")
     # parser.add_argument("-f", "--offset", help="Skip more seconds at begining of background video", default=0, type=int)
     args = parser.parse_args()
 
     if args.campaign == 'all':
         all()
     else:
-        process_campaign(args.campaign, step=args.step)
+        process_campaign(args.campaign, step=args.step, template=args.template, background=args.background, output_dir=args.output, function=args.function, n=args.number)
 
 
 if __name__ == '__main__':
