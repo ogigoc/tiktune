@@ -42,12 +42,14 @@ def main():
             video['url'] = f'https://www.tiktok.com/@{username}/video/{video_id}'
             video['create_time'] = video_resp['create_time']
             video['description'] = video_resp['desc']
-            video['music'] = 'original' if video_resp['music']['title'].startswith('original sound') else video_resp['music']['title']
+            # video['music'] = 'original' if video_resp['music']['title'].startswith('original sound') else video_resp['music']['title']
             video['region'] = video_resp['region']
             for k, v in video_resp['risk_infos'].items():
                 video['risk_' + k] = v
             video['hashtags'] = [h['hashtag_name'] for h in video_resp['text_extra'] if h['type'] == 1]
             video['campaign'] = next((h for h in video['hashtags'] if h in campaign_tags), None)
+            video['has_overlay_text'] = bool(video_resp['interaction_stickers'])
+            video['scenes'] = 'scenes' in {h['hashtag_name'] for h in video_resp['text_extra']}
 
             if video_id not in videos:
                 videos[video_id] = video

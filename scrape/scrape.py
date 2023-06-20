@@ -10,7 +10,7 @@ USER_POSTS_ENDPOINT = "https://scraptik.p.rapidapi.com/user-posts"
 API_KEYS = [
     '0451f517a1msh2c9364871a27d44p17a616jsn208f4ae81458',
     '353ac5d36amsh07aafabd66ebf02p1b50a9jsn77d0071bb128',
-    '658491cebemshf233eca18c0c2b5p16800bjsn5acea6080d8b',
+    # '658491cebemshf233eca18c0c2b5p16800bjsn5acea6080d8b',
     'f59be74f09msh492de900bf392c8p14dde4jsn9f382bf2ea66',
     'df851f55bemshc19b9039c27dab3p151bbajsn268253b92dc3',
     '6e93e5bf84msh2ad5025586776d6p134ebdjsn356f9da2bfee',
@@ -80,8 +80,12 @@ def main():
             raise Exception(f"Response returned status: {response.status_code} response: {response.text}")
         
         data = response.json()
-        if data['status_code'] != 0:
-            raise Exception(f"Error in response {response.text}")
+
+        if 'status_code' in data:
+            if data['status_code'] != 0:
+                raise Exception(f"Error: status_code {data['status_code']} in response {response.text[:100]}")
+        elif not data['success']:
+            raise Exception(f"Error in response {response.text[:100]}")
         
         with open(result_path, 'w') as file:
             json.dump(data, file, indent=2)
