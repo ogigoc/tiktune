@@ -263,7 +263,7 @@ class AndroidDevice():
             popup_text = 'Failed to upload and has been saved to drafts.'
             if self.d(text=popup_text).exists():
                 self.log.info(f"Found popup with text {popup_text}")
-                self.d(className='android.widget.ImageView', index=3)[-1].click()
+                self.d(className='android.widget.ImageView', index=3, clickable=True).click()
                 return True
             
             popup_text = 'Add to Home screen?'
@@ -318,6 +318,12 @@ class AndroidDevice():
             if self.d(text=popup_text).exists():
                 self.log.info(f"Found popup with text {popup_text}")
                 self.d(text='Cancel').click()
+                return True
+            
+            popup_text = "Couldn't upload video. The video was saved to your drafts."
+            if self.d(text=popup_text).exists():
+                self.log.info(f"Found popup with text {popup_text}")
+                self.d(className='android.widget.ImageView', clickable=True)[-1].click()
                 return True
             
             self.log.debug(f"Didn't find any popup to close")
@@ -475,6 +481,7 @@ class AndroidDevice():
         except uiautomator2.exceptions.UiObjectNotFoundError:
             self.log.warn(f"Account switcher not found, trying again")
             time.sleep(1)
+            self.recover()
             current_account = self.select(textMatches=account_names_re)[0].get_text()
         self.log.info(f"Current account is {current_account}")
 
@@ -577,7 +584,12 @@ class AndroidDevice():
 
         title_with_tags = title + ' ' + ' '.join(['#' + t for t in tags])
         self.log.info(f"Setting title to {title_with_tags}")
-        self.select(textMatches="(Describe your post|Share your thoughts|Share what).*").set_text(title_with_tags)
+
+        if not self.exists(timeout=20, textMatches="(Describe your post|Share your thoughts|Share what).*"):
+            if self.exists(timeout=10, text='Next'):
+                self.click(text='Next')
+
+        self.select(timeout=self.TIKTOK_START_TIMEOUT, textMatches="(Describe your post|Share your thoughts|Share what).*").set_text(title_with_tags)
         time.sleep(10)
         self.log.info(f"Pressing back")
         self.d.press('back')
