@@ -67,6 +67,7 @@
 01 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_4
 11 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7pro_10
 21 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7old_11
+01 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_6
 
 
 # Vasa
