@@ -13,21 +13,19 @@ redminote:
   device_id: 3646ec0f
   model: RedmiNote8T
   videos_per_campaign:
-    karminnakozi: 2
-    vasaklinka: 1
     cigagromm: 2
     snimaknasetajne: 2
-    monalisakristianflorea: 1
+    karminnakozi: 3
+    balerinarmx: 1
 
 j7:
   name: j7
   device_id: 100.99.18.17
   model: SM-J710FN
   videos_per_campaign:
-    cigagromm: 1
+    cigagromm: 2
     karminnakozi: 2
     snimaknasetajne: 1
-    vasaklinka: 1
     
 j7_2:
   name: j7_2
@@ -35,10 +33,8 @@ j7_2:
   model: SM-J710FN
   videos_per_campaign:
     snimaknasetajne: 1
-    vasaklinka: 1
-    monalisakristianflorea: 1
-    karminnakozi: 1
-    cigagromm: 1
+    karminnakozi: 2
+    cigagromm: 2
     
 j7_3:
   name: j7_3
@@ -46,8 +42,7 @@ j7_3:
   # device_id: 100.106.187.72
   model: SM-J710FN
   videos_per_campaign:
-    cigagromm: 1
-    vasaklinka: 1
+    cigagromm: 2
     snimaknasetajne: 1
     karminnakozi: 2
 
@@ -57,27 +52,24 @@ j7_4:
   model: SM-J710FN
   videos_per_campaign:
     cigagromm: 1
-    karminnakozi: 1
-    monalisakristianflorea: 1
-    snimaknasetajne: 1
-    vasaklinka: 1
+    karminnakozi: 2
+    snimaknasetajne: 2
     
 j7_5:
   name: j7_5
   device_id: 100.98.41.75
   model: SM-J710FN
   videos_per_campaign:
-    snimaknasetajne: 1
     karminnakozi: 1
+    snimaknasetajne: 1
 
 j7ana_6:
   name: j7ana_6
   device_id: 100.79.143.93
   model: SM-J730F
   videos_per_campaign:
-    vasaklinka: 1
+    karminnakozi: 2
     cigagromm: 1
-    karminnakozi: 1
     snimaknasetajne: 1
 
 j7pro_7:
@@ -111,6 +103,10 @@ j7old_9:
   anydesk_id: 624035055
   phone_number: 0677318661
   model: SM-J700H
+  videos_per_campaign:
+    karminnakozi: 1
+    snimaknasetajne: 1
+    cigagromm: 1
 
 k22_1:
   name: k22_1
@@ -118,10 +114,9 @@ k22_1:
   model: LM-K200EMW
   phone_number: 0677469574
   videos_per_campaign:
-    vasaklinka: 2
-    cigagromm: 2
-    monalisakristianflorea: 1
-    karminnakozi: 2
+    cigagromm: 3
+    karminnakozi: 3
+    snimaknasetajne: 1
 
 k22_2:
   name: k22_2
@@ -131,9 +126,8 @@ k22_2:
   model: LM-K200EMW
   phone_number: 0677341550
   videos_per_campaign:
-    cigagromm: 1
-    monalisakristianflorea: 1
-    vasaklinka: 1
+    snimaknasetajne: 1
+    cigagromm: 2
     karminnakozi: 2
 
 j7pro_10:
@@ -168,9 +162,8 @@ k22_3:
   model: LM-K200EMW
   phone_number: 0677321916
   videos_per_campaign:
-    karminnakozi: 1
+    karminnakozi: 2
     snimaknasetajne: 2
-    monalisakristianflorea: 1
 
 k22_4:
   name: k22_4
@@ -180,12 +173,13 @@ k22_4:
   model: LM-K200EMW
   videos_per_campaign:
     karminnakozi: 2
-    vasaklinka: 2
+    cigagromm: 2
 
-k22_5:
-  name: k22_5
-  device_id: c102d43c
-  phone_number: 0677394879
+# bootloop
+# k22_5:
+#   name: k22_5
+#   device_id: c102d43c
+#   phone_number: 0677394879
 
 k22_6:
   name: k22_6
@@ -213,7 +207,7 @@ k22djoka_8:
 
 k22djoka_9:
   name: k22djoka_9
-  device_id: 100.79.231.113
+  device_id: bc85d402
   phone_number: 0677469453
   anydesk_id: 1426204864
   model: LM-K200EMW
@@ -229,7 +223,7 @@ k22djoka_10:
   model: LM-K200EMW
   videos_per_campaign:
     snimaknasetajne: 1
-    vasaklinka: 1
+    karminnakozi: 1
 
 k22djoka_11:
   name: k22djoka_11
@@ -238,6 +232,5 @@ k22djoka_11:
   anydesk_id: 1426204864
   model: LM-K200EMW
   videos_per_campaign:
+    cigagromm: 1
     karminnakozi: 1
-    monalisakristianflorea: 1
-  

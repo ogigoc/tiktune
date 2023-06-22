@@ -21,8 +21,9 @@
 
 31 16 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7pro_10
 01 17 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7old_11
+16 17 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7old_9
 
-31 17 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7pro_10
+# 31 17 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh j7pro_10
 
 01 18 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7
 31 18 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7_2
@@ -42,9 +43,9 @@
 
 31 22 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7ana_6
 
-01 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_3
-31 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_4
-41 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_6
+# 01 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_3
+# 31 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_4
+# 41 20 * * * /home/ognjen/Projects/tiktok-promo/job_scroll.sh k22_6
 
 01 23 * * * /home/ognjen/Projects/tiktok-promo/job.sh k22_3
 31 23 * * * /home/ognjen/Projects/tiktok-promo/job.sh k22_4
@@ -52,6 +53,7 @@
 
 31 00 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7pro_10
 01 01 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7old_11
+16 01 * * * /home/ognjen/Projects/tiktok-promo/job.sh j7old_9
 
 
 01 02 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7
@@ -67,7 +69,8 @@
 01 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_4
 11 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7pro_10
 21 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7old_11
-01 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_6
+31 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh k22_6
+41 04 * * * /home/ognjen/Projects/tiktok-promo/job_create_gmail.sh j7old_9
 
 
 # Vasa
