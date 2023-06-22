@@ -88,12 +88,12 @@ class Segment():
         ], size=self.template.size)
 
         try:
-            result.write_videofile(self.output_path, threads=6)
+            result.write_videofile(self.output_path)
         except IndexError:
             # Short by one frame, so get rid on the last frame:
             result = result.subclip(t_end=(result.duration - 1.0/result.fps))
             result.write_videofile(self.output_path)
-            result.write_videofile(self.output_path, threads=6)
+            result.write_videofile(self.output_path)
         except Exception as e:
             raise e
 

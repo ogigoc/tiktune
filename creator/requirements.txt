@@ -1,11 +1,11 @@
 # git+https://git.aubio.org/aubio/aubio/
-git+https://github.com/CPJKU/madmom
+# git+https://github.com/CPJKU/madmom
 librosa
 moviepy==1.0.3
 pygame==2.1.2
 yt-dlp==2023.2.17
 pandas==1.5.3
 gspread==5.7.2
-../../AudioOwl
+# ../../AudioOwl
 scenedetect[opencv]
 pyyaml
