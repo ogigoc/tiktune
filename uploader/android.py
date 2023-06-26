@@ -586,7 +586,8 @@ class AndroidDevice():
         self.log.info(f"Setting title to {title_with_tags}")
 
         if not self.exists(timeout=20, textMatches="(Describe your post|Share your thoughts|Share what).*"):
-            if self.exists(timeout=10, text='Next'):
+            self.log.debug(f"Title filed not found, waiting to click Next again.")
+            if self.exists(timeout=120, text='Next'):
                 self.click(text='Next')
 
         self.select(timeout=self.TIKTOK_START_TIMEOUT, textMatches="(Describe your post|Share your thoughts|Share what).*").set_text(title_with_tags)
