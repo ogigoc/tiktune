@@ -55,7 +55,7 @@ class UIAutomatorDevice():
         # connect adb first
         if self.android_device.remote:
             self.android_device.log.info(f"Connecting adb to remote device {self.android_device.name} {self.android_device.id}")
-            cmd = subprocess.run(f'adb connect {self.android_device.id}', shell=True)
+            cmd = subprocess.run(f'adb connect {self.android_device.id}:5555', shell=True)
             if cmd.returncode != 0:
                 self.android_device.log.error(f"Failed to connect to device {self.android_device.name} {self.android_device.id} with output {cmd.stdout}")
                 raise Exception(f"Failed to connect to device {self.android_device.name} {self.android_device.id} with output {cmd.stdout}")
@@ -563,7 +563,7 @@ class AndroidDevice():
 
         self.click(text='Upload')
         self.click(text='Videos')
-        time.sleep(2)
+        time.sleep(10)
         self.click(idx=0, textMatches='\d\d:\d\d', resourceIdMatches='com.zhiliaoapp.musically.*')
 
         if sound_url:
