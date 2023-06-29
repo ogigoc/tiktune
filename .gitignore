@@ -6,3 +6,4 @@ profiles/
 logs.txt
 tmp.log
 password_creator.py
+logs/
