@@ -22,7 +22,7 @@ def parse_views_string(views_str):
         return int(float(views_str[:-1]) * 1000000)
     return int(int(views_str) / 1000)
 
-def update_hashtag_views():
+def update_hashtag_views(force=False):
     """
     Updates the current_reach column in the google sheet.
     Sheet column with the name of "tag" is the hashtag.
@@ -38,7 +38,7 @@ def update_hashtag_views():
         current_reach = row['current_reach']
 
         # Skip rows with end date more then a two weeks age and that have already been completed
-        if datetime.strptime(row['end'], '%d/%m/%Y') < datetime.now() - timedelta(days=14) and int(row['current_reach']) >= int(row['goal']):
+        if not force and datetime.strptime(row['end'], '%d/%m/%Y') < datetime.now() - timedelta(days=14) and int(row['current_reach']) >= int(row['goal']):
             print(f'Skipping {hashtag} because end date is more then a week ago')
             continue
 
@@ -64,4 +64,10 @@ def update_hashtag_views():
         time.sleep(1)
         
 if __name__ == '__main__':
-    update_hashtag_views()
+    # add force argument
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--force", help="If True refresh all campaigns", action='store_true', default=False)
+    args = parser.parse_args()
+    
+    update_hashtag_views(force=args.force)

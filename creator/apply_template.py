@@ -315,10 +315,10 @@ def time_to_seconds(time_str):
     total_seconds = (hours * 3600) + (minutes * 60) + seconds + milliseconds
     return total_seconds
 
-def process_campaign(campaign_name, step, template="", background="", output_dir="results", function="simple", n=100):
+def process_campaign(campaign_name, step, template="", background="", output_dir="results", function="simple", n=100, bstart=0, bend=0):
     print(f"Processing campaign {campaign_name}")
     if function == "simple":
-        segments = create_segments(campaign_name, step=step, template=template, background=background, output_dir=output_dir)
+        segments = create_segments(campaign_name, step=step, template=template, background=background, output_dir=output_dir, bstart=bstart, bend=bend)
     elif function == "scenes":
         # read campaign cut timings
         with open('../campaigns.yaml', 'r') as file:
@@ -361,6 +361,8 @@ def main():
     parser.add_argument("-o", "--output", help="Output directory name", default="results")
     parser.add_argument("-f", "--function", help="Fucntion to apply to create segments", default="simple")
     parser.add_argument("-n", "--number", help="Number of videos to create", default=100, type=int)
+    parser.add_argument("--bstart", help="Start time of the background video in seconds", default=3, type=int)
+    parser.add_argument("--bend", help="End time of the background video in seconds", default=3, type=int)
 
     # parser.add_argument("-f", "--offset", help="Skip more seconds at begining of background video", default=0, type=int)
     args = parser.parse_args()
@@ -368,7 +370,7 @@ def main():
     if args.campaign == 'all':
         all()
     else:
-        process_campaign(args.campaign, step=args.step, template=args.template, background=args.background, output_dir=args.output, function=args.function, n=args.number)
+        process_campaign(args.campaign, step=args.step, template=args.template, background=args.background, output_dir=args.output, function=args.function, n=args.number, bstart=args.bstart, bend=args.bend)
 
 
 if __name__ == '__main__':
