@@ -7,7 +7,7 @@ def main():
     videos = list(csv.reader(open('backgrounds.csv', 'r')))[1:]
 
     # skip old unnamed vids
-    videos = videos[43:]
+    videos = videos[160:]
     
     for video in videos:
         output_dir = f'data/{video[1]}/music_videos/'
