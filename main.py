@@ -21,34 +21,47 @@ ACCOUNTS_DB = 'accounts_db.json'
 VIDEOS_DB = 'videos_db.json'
 UPLOAD_RETRY = 3
 
-def do_campaign(campaign, active_accounts, videos, device, interactive=False):
-    log.info(f"Executing campaign {campaign['name']} with {device['videos_per_campaign'][campaign['name']]} videos")
 
+def get_unuploaded_video(campaign):
     # Sync drive videos
     if campaign['gdrive_dir']:
         drive.sync(local_dir=campaign['local_dir'], gdrive_dir=campaign['gdrive_dir'])
+
+    log.info('Reading videos...')
+    videos = pd.read_json(VIDEOS_DB, lines=True)
 
     local_files = sorted(list(glob.glob(campaign['local_dir'] + '*')))
     uploaded_files = [
         file.split('/')[-1]
         for file in videos.file.values
     ]
+
     new_files = [
         file 
         for file in local_files
         if file.split('/')[-1] not in uploaded_files
     ]
 
-    random.shuffle(new_files)
-    log.info(f"Unuploaded videos: {len(new_files)}")
-    if len(new_files) <= len(active_accounts):
+    if not new_files:
         telegram.send_message(f"No new files for campaign {campaign['name']}")
+        raise Exception(f"No new files for campaign {campaign['name']}")
+
+    print(f"New files: {len(new_files)}")
+    new_file = random.choice(new_files)
+    print(f"Chosen file: {new_file}")
+
+    return new_file
+
+def do_campaign(campaign, active_accounts, device, interactive=False):
+    log.info(f"Executing campaign {campaign['name']} with {device['videos_per_campaign'][campaign['name']]} videos")
 
     log.info('Posting videos...')
     errors = []
     uploaded = 0
 
-    for video_file, account in zip(new_files, active_accounts.itertuples(index=False)):
+    for account in active_accounts.itertuples(index=False):
+        video_file = get_unuploaded_video(campaign)
+
         title = random.choice(campaign['titles'])
 
         tiktok_id = ''
@@ -192,9 +205,6 @@ def main():
             devices = yaml.safe_load(file)
         log.info('Reading accounts...')
         accounts = pd.read_json(ACCOUNTS_DB, lines=True)
-        log.info('Reading video...')
-        videos = pd.read_json(VIDEOS_DB, lines=True)
-
         if args.device not in devices:
             raise Exception(f"Unknown device {args.device}")
 
@@ -209,7 +219,7 @@ def main():
         
         message_report = dict()
         for campaign_name, video_count in device['videos_per_campaign'].items():
-            message_report[campaign_name] = do_campaign(campaigns[campaign_name], active_accounts.head(video_count), videos, device, interactive=args.interactive)
+            message_report[campaign_name] = do_campaign(campaigns[campaign_name], active_accounts.head(video_count), device, interactive=args.interactive)
             if video_count != 0:
                 active_accounts = active_accounts.tail(-video_count)
 
