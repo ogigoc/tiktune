@@ -848,8 +848,10 @@ pijanac:
   name: pijanac
   gdrive_dir: null
   local_dir: creator/data/pijanac/results/
-  sound_name: null
-  sound_url: null
+  #sound_name: null
+  #sound_url: null
+  sound_name: Vasa_Pijanac
+  sound_url: https://www.tiktok.com/music/VasaPijanac-7250420088661084934
   tags:
   - vasapijanac
   - vasa_uno

@@ -1,84 +1,98 @@
 desk:
   name: desk
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 0
 
 repurpose:
   name: repurpose
   videos_per_campaign:
-    karminnakozi: 4
+    pijanac: 1
 
 redminote:
   name: redminote
   device_id: 3646ec0f
   model: RedmiNote8T
   videos_per_campaign:
-    karminnakozi: 3
+    pijanac: 8
     
 j7:
   name: j7
   device_id: 100.99.18.17
   model: SM-J710FN
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 6
         
 j7_2:
   name: j7_2
   device_id: 100.77.209.31
   model: SM-J710FN
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 5
         
 j7_3:
   name: j7_3
   device_id: 52038effec9da3db
   # device_id: 100.106.187.72
+  anydesk_id: 817234652
+  phone_number: 0677324734
   model: SM-J710FN
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 5
 
 j7_4:
   name: j7_4
   device_id: 100.76.20.44
   model: SM-J710FN
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 5
         
 j7_5:
   name: j7_5
-  device_id: 100.98.41.75
+  device_id: 520314174d27c325
+  #device_id: 100.98.41.75
+  phone_number: 0677319412
   model: SM-J710FN
   videos_per_campaign:
+    pijanac: 2
     
 j7ana_6:
   name: j7ana_6
-  device_id: 100.79.143.93
+  phone_number: 0677375904
+  #device_id: 100.79.143.93
+  device_id: 52003ca8ec27c42d
   model: SM-J730F
   videos_per_campaign:
+    pijanac: 4
     
 j7pro_7:
   name: j7pro_7
-  device_id: 100.122.123.28
+  #device_id: 100.122.123.28
+  device_id: 520019aaeabc35ab
   anydesk_id: 897069264
+  phone_number: 0677326284
   model: SM-J730G/DS
   videos_per_campaign:
-    balerinarmx: 8
+    pijanac: 8
 
 j7_8:
   name: j7_8
-  device_id: 100.104.44.42
+  #device_id: 100.104.44.42
+  device_id: 52031b155866c32b
   anydesk_id: 876197025
+  phone_number: 0677399408
   model: SM-J710FN
   videos_per_campaign:
-    balerinarmx: 8
+    pijanac: 8
 
 j7vasa_8:
   name: j7vasa_8
   anydesk_id: 522371119
-  device_id: 100.105.200.128
+  #device_id: 100.105.200.128
+  device_id: 31006851a979b353
+  phone_number: 0677317716
   model: SM-J710FN
   videos_per_campaign:
-    balerinarmx: 8
+    pijanac: 8
 
 j7old_9:
   name: j7old_9
@@ -88,7 +102,7 @@ j7old_9:
   phone_number: 0677318661
   model: SM-J700H
   videos_per_campaign:
-    karminnakozi: 1
+    pijanac: 3
     
 k22_1:
   name: k22_1
@@ -96,7 +110,7 @@ k22_1:
   model: LM-K200EMW
   phone_number: 0677469574
   videos_per_campaign:
-    karminnakozi: 3
+    pijanac: 7
     
 k22_2:
   name: k22_2
@@ -106,7 +120,7 @@ k22_2:
   model: LM-K200EMW
   phone_number: 0677341550
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 6
 
 j7pro_10:
   name: j7pro_10
@@ -115,7 +129,7 @@ j7pro_10:
   anydesk_id: 248910818
   model: SM-J730F
   videos_per_campaign:
-    karminnakozi: 1
+    pijanac: 3
     
 j7old_11:
   name: j7old_11
@@ -125,6 +139,7 @@ j7old_11:
   anydesk_id: 814363188
   model: SM-J700H
   videos_per_campaign:
+    pijanac: 3
     
 # lenovo1:
 #   name: lenovo1
@@ -137,7 +152,7 @@ k22_3:
   model: LM-K200EMW
   phone_number: 0677321916
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 6
     
 k22_4:
   name: k22_4
@@ -146,7 +161,7 @@ k22_4:
   phone_number: 0677395260
   model: LM-K200EMW
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 6
 
 # bootloop
 # k22_5:
@@ -160,53 +175,68 @@ k22_6:
   phone_number: 0677335279
   model: LM-K200EMW
   videos_per_campaign:
-    karminnakozi: 1
+    pijanac: 2
   
 k22_7:
   name: k22_7
   device_id: bc91d4a5
   phone_number: 0677320171
   model: LM-K200EMW
+  videos_per_campaign:
+    pijanac: 1
 
 k22djoka_8:
   name: k22djoka_8
   anydesk_id: 1507630193
-  device_id: 100.119.232.107
+  device_id: 2ff59b23
   model: LM-K200EMW
   videos_per_campaign:
-    karminnakozi: 1
+    pijanac: 5
 
 k22djoka_9:
   name: k22djoka_9
-  device_id: 100.79.231.113
+  device_id: bc85d402
   phone_number: 0677469453
   anydesk_id: 1426204864
   model: LM-K200EMW
   videos_per_campaign:
-    karminnakozi: 2
+    pijanac: 4
 
 k22djoka_10:
   name: k22djoka_10
-  device_id: 100.67.235.15
+  device_id: c6bcd427
   phone_number: 0677311251
   anydesk_id: 1588157482
   model: LM-K200EMW
   videos_per_campaign:
-    karminnakozi: 1
+    pijanac: 3
 
 k22djoka_11:
   name: k22djoka_11
-  device_id: 100.66.55.43
+  device_id: c6b9643
   phone_number: 0677393161
   anydesk_id: 1426204864 
   model: LM-K200EMW
   videos_per_campaign:
-    karminnakozi: 1
+    pijanac: 3
 
 k22a_1:
   name: k22a_1
-  device_id: 100.109.61.92
+  device_id: 9414907a
   anydesk_id: 1594608359
   model: LM-K200EMW
-  videos_per_capaign:
-    
+  videos_per_campaign:
+    nickibarbieworld: 1
+
+k22vasa_10:
+  name: k22vasa_10
+  device_id: c0f2d44e
+  phone_number: 0677384325
+  anydesk_id:
+  model: LM-K200EMW
+
+k22vasa_11:
+  name: k22vasa_11
+  device_id: c054caf3
+  phone_number: 0677323718
+  model: LM-K200EMW
