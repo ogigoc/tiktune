@@ -489,6 +489,10 @@ class AndroidDevice():
             self.log.info(f"Switching account to {account.username}")
             self.log.info(f"Clicking account switcher")
             self.click(idx=0, textMatches=account_names_re)
+
+            time.sleep(2)
+            self.recover()
+
             self.click(textMatches=f'{account.username}|{account.name}')
             time.sleep(6)
             self.log.info(f"Switched account to {account.username}")
@@ -567,13 +571,36 @@ class AndroidDevice():
         self.click(idx=0, textMatches='\d\d:\d\d', resourceIdMatches='com.zhiliaoapp.musically.*')
 
         if sound_url:
-            self.click(message='Sound Name', timeout=120, textMatches=f'{sound_name}.*')
+            time.sleep(10)
+
+            if self.exists(timeout=20, text='Select'):
+                self.log.debug(f"Entered clicking double next, then sound.")
+                self.click(text='Next')
+                if self.exists(timeout=30, text='Sounds'):
+                    self.click(text='Sounds')
+                else:
+                    self.click(text='Next')
+                    self.click(text='Sounds')
+            else:
+                self.click(message='Sound Name', timeout=120, textMatches=f'{sound_name}.*')
+
             self.click(text='Volume')
             self.log.info(f"Setting original sound volume to 100%")
-            self.select(className='android.widget.SeekBar')[0].click(offset=self.ORIGINAL_SOUND_OFFSET)
-            time.sleep(0.5)
-            self.log.info(f"Setting added sound volume to 1%")
-            self.select(className='android.widget.SeekBar')[1].click(offset=self.ADDED_SOUND_OFFSET)
+            time.sleep(3)
+
+            volume_retries = 3
+            for i in range(volume_retries):
+                try:
+                    self.select(className='android.widget.SeekBar')[0].click(offset=self.ORIGINAL_SOUND_OFFSET)
+                    time.sleep(0.5)
+                    self.log.info(f"Setting added sound volume to 1%")
+                    self.select(className='android.widget.SeekBar')[1].click(offset=self.ADDED_SOUND_OFFSET)
+                    break
+                except uiautomator2.exceptions.UiObjectNotFoundError as e:
+                    if i == volume_retries - 1:
+                        raise e
+                    self.log.warn(f"Volume control error: {e}")
+                
             time.sleep(0.5)
             self.click(text='Done')
 
@@ -586,7 +613,7 @@ class AndroidDevice():
         self.log.info(f"Setting title to {title_with_tags}")
 
         if not self.exists(timeout=20, textMatches="(Describe your post|Share your thoughts|Share what).*"):
-            self.log.debug(f"Title filed not found, waiting to click Next again.")
+            self.log.debug(f"Title field not found, waiting to click Next again.")
             if self.exists(timeout=120, text='Next'):
                 self.click(text='Next')
 
