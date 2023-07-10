@@ -1,3 +1,5 @@
+import json
+import glob
 import re
 import subprocess
 import yaml
@@ -53,7 +55,7 @@ DATA_DIR = 'data'
 
 
 class Segment():
-    def __init__(self, start, template, background, effect, effect_name, output_dir, background_filename=None, start_name=None):
+    def __init__(self, start, template, background, effect, effect_name, output_dir, background_filename=None, start_name=None, timing_effect=None):
         self.start = start
         if start_name:
             self.start_name = start_name
@@ -67,11 +69,15 @@ class Segment():
             self.background_filename = background_filename
         self.effect = effect
         self.effect_name = effect_name
+        if timing_effect:
+            self.effect_name = f'{timing_effect["name"]}_{effect_name}'
         self.output_dir = output_dir
         self.output_path = (
             f'{output_dir}/{str(round(self.start_name)).zfill(5)};{self.background_filename.split("/")[-1].replace("/", "").replace(";", "")};{self.template.filename.split("/")[-1]};'
             f'{self.effect_name}.mp4'
         )
+        self.timing_effect = timing_effect
+
     
     def write(self):
         if not os.path.isdir(self.output_dir):
@@ -80,10 +86,54 @@ class Segment():
         if os.path.exists(self.output_path):
             print(f"Skipping {self.output_path}")
             return
+        
+        background_clip = self.effect(self.background.subclip(self.start, self.start + self.template.duration).without_audio())
+
+        if self.timing_effect:
+            import shutil
+            # Save background as tmp file
+            shutil.rmtree('/tmp/tmpclip/', ignore_errors=False, onerror=None)
+            os.makedirs('/tmp/tmpclip/frames')
+
+            background_clip = CompositeVideoClip(
+                [self.effect(self.background.subclip(self.start, self.start + self.template.duration).without_audio())],
+                size = (1080, 1920)
+            )
+            background_clip.write_videofile('/tmp/tmpclip/background_clip.mp4')
+
+            # subprocess.check_call("""
+            #     ffmpeg -i ./tmp/frames/img%04d.png -i out.m4a \
+            #     -c:v libx264 -b:v 27736k -bufsize 30000k \
+            #     -r 25 -video_track_timescale 25000 -output_ts_offset 0.01 -pix_fmt yuv420p \
+            #     -c:a copy -metadata:s:v:0 language=eng -metadata:s:a:0 language=eng -shortest out.mp4
+            # """)
+            print("Spliting clip into frames")
+            subprocess.check_call(['ffmpeg', '-i', '/tmp/tmpclip/background_clip.mp4', '/tmp/tmpclip/frames/img%04d.png', '-hide_banner', '-loglevel', 'error'])
+            # apply imagemagic
+            print("Apply image MAGIC")
+            subprocess.check_call(['cp', '-r', '/tmp/tmpclip/frames', '/tmp/tmpclip/frames_final'])
+            for frame_config in self.timing_effect['magic_json']:
+                frame_num = frame_config["frame"] + 1
+                # frame_num = int(frame_num / 4)
+                magick_command = [
+                    'magick', f'/tmp/tmpclip/frames/img{frame_num:04}.png'
+                ] + [
+                    filter_param for filter in frame_config['fx'] for filter_param in filter
+                ] + [f'/tmp/tmpclip/frames_final/img{frame_num:04}.png'] 
+                subprocess.check_call(magick_command)
+                print(' '.join(magick_command))
+
+            # for source_frame in sorted(list(glob.glob('/tmp/tmpclip/frames/*'))):
+
+            print("Compose video from frames")
+            subprocess.check_call(['ffmpeg', '-i', '/tmp/tmpclip/frames_final/img%04d.png', '-c:v', 'libx264', '-r', '24', '-vf', 'pad=ceil(iw/2)*2:ceil(ih/2)*2', '-pix_fmt', 'yuv420p', '/tmp/tmpclip/background_clip_final.mp4', '-hide_banner', '-loglevel', 'error'])
+            # subprocess.check_call("ffmpeg -i /tmp/tmpclip/frames/img%04d.png -c:v libx264 -r 25 -pix_fmt yuv420p /tmp/tmpclip/background_clip_final.mp4")
+
+            background_clip = VideoFileClip('/tmp/tmpclip/background_clip_final.mp4')
 
         print(f"Rendering {self.output_path}")
         result = CompositeVideoClip([
-            self.effect(self.background.subclip(self.start, self.start + self.template.duration).without_audio()),
+            background_clip,
             self.template
         ], size=self.template.size)
 
@@ -96,9 +146,11 @@ class Segment():
             result.write_videofile(self.output_path)
         except Exception as e:
             raise e
+        
+        quit()
 
 
-def create_segments(campaign_name, step, bstart=3, bend=3, template="", background="", output_dir="results"):
+def create_segments(campaign_name, step, bstart=3, bend=3, template="", background="", output_dir="results", timing_effect=None):
     print(f"Loading templates for campaign {campaign_name}")
     template_paths = [template] if template else sorted(list(glob.glob(f'{DATA_DIR}/{campaign_name}/templates/*')))
     templates = [
@@ -133,6 +185,7 @@ def create_segments(campaign_name, step, bstart=3, bend=3, template="", backgrou
                 effect=effects[i % len(effects)][1],
                 effect_name=effects[i % len(effects)][0],
                 output_dir=f'{DATA_DIR}/{campaign_name}/{output_dir}',
+                timing_effect=timing_effect,
             ))
             i += 1
             start += step
@@ -201,7 +254,7 @@ def create_segments_scenes(campaign_name, template, background, cut_timings, n, 
         ) + ';' + ''.join([f"[v{i}][a{i}]" for i in range(len(cut_timings) - 1)]) + f"concat=n={len(cut_timings) - 1}:v=1:a=1[outv][outa]"
 
         # Run FFmpeg command with the built filtergraph
-        subprocess.call(['ffmpeg', '-i', background, '-filter_complex', filtergraph, '-map', '[outv]', '-map', '[outa]', 'template_cuts_tmp.mp4', '-y'])
+        subprocess.check_call(['ffmpeg', '-i', background, '-filter_complex', filtergraph, '-map', '[outv]', '-map', '[outa]', 'template_cuts_tmp.mp4', '-y'])
         import time
         time.sleep(1)
 
@@ -334,6 +387,20 @@ def process_campaign(campaign_name, step, template="", background="", output_dir
             print(f"Cut timings: {timings}")
 
         segments = create_segments_scenes(campaign_name, template=template, background=background, output_dir=output_dir, cut_timings=timings, n=n)
+    elif function == 'timing_effects':
+        with open('../campaigns.yaml', 'r') as file:
+            campaign = yaml.safe_load(file)[campaign_name]
+            try:
+                template_dict = next(t for t in campaign['templates'] if t['path'] == template)
+            except StopIteration:
+                raise Exception(f"Template {template} not found in campaign {campaign_name}")
+        
+        timing_effect = {
+            'magic_json': json.load(open(template_dict['magic_json_path'])),
+            'name': 'timing_david'
+        }
+
+        segments = create_segments(campaign_name, step=step, template=template, background=background, output_dir=output_dir, bstart=bstart, bend=bend, timing_effect=timing_effect)
     else:
         raise Exception(f"Unknown function {function}")
     print(f"Creating {len(segments)} clips")

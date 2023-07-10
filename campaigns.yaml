@@ -896,3 +896,8 @@ nickibarbieworld:
   - Barbie World!!!
   - Which version of this song is the best? 
   - Ice Spice got another hit 😩🔥
+
+minarich:
+  templates:
+  - path: data/minarich/templates/minaref3.mov
+    magic_json_path: data/minarich/template_magic_json/minaref3-sixth.json
